@@ -102,6 +102,7 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "Stagem\\User\\": "module/Stagem/User/src/"
     }
   },
   "extra": [],
