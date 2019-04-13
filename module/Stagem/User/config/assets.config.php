@@ -30,12 +30,16 @@ return [
             'collections' => [
                 'user_js' => [
                     'assets' => [
-                        'js/user.js'
+                        'js/user.js',
+                        'js/popup.js',
+                        'js/jquery.snap.js',
+                        'js/jquery.polartimer.js'
                     ],
                 ],
                 'user_css' => [
                     'assets' => [
-                        'css/user.css'
+                        'css/user.css',
+                        'css/popup.css'
                     ],
                 ],
                 'user_images' => [
