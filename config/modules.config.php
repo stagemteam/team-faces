@@ -58,4 +58,6 @@ return [
     'Popov\ZfcMail',
     #'Popov\ZfcStatus',
     'Popov\ZfcTab',
+
+    'Stagem\Picker',
 ];

@@ -97,6 +97,7 @@
   ],
   "autoload": {
     "psr-4": {
+      "Stagem\\Picker\\": "module/Stagem/Picker/src/"
     }
   },
   "autoload-dev": {
