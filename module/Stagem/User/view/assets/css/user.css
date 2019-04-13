@@ -1,0 +1,115 @@
+body.user-login{
+	background-image: url("../img/login-background.png");
+	background-size: 100% 100%;
+}
+@font-face{
+	font-family: ProximaNova-Bold;
+	src: url(../fonts/ProximaNova-Bold.eot);
+	format("embedded-opentype"), url(../fonts/ProximaNova-Bold.woff)
+	format("woff"),url(../fonts/ProximaNova-Bold.ttf)
+	format("truetype");
+	font-weight:600;
+	font-style:normal
+}
+@font-face{
+	font-family: ProximaNova-Regular;
+	src: url(../fonts/ProximaNova-Regular.eot);
+	format("embedded-opentype"), url(../fonts/ProximaNova-Regular.woff)
+	format("woff"),url(../fonts/ProximaNova-Regular.ttf)
+	format("truetype");
+	font-weight:600;
+	font-style:normal
+}
+.form-login{
+	margin-top: 10%;
+}
+.form-login-block{
+	max-width: 400px;
+	padding-bottom: 60px;
+	background-color: #fff;
+	margin: 0 auto;
+	border-radius: 5px;
+	padding-bottom: 30px;
+	box-shadow: 0 10px 20px 0 rgba(128,160,169,.2);
+}
+.formH2{
+	font-family: ProximaNova-Bold;
+	font-weight: 600;
+	font-size: 32px;
+	color: #31464e;
+	letter-spacing: 0;
+	line-height: 32px;
+	text-align: center;
+}
+.padding50{
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+.fromGroup input{
+	display: block;
+	width: 100%;
+	border: none!important;
+	border-top: solid .5px #dce9ea!important;
+	line-height: 54px;
+	padding-left: 15px;
+	-webkit-appearance: none;
+	border-radius: 0;
+	background: #fff;
+	color: #31464e;
+}
+.fromGroup input::-webkit-input-placeholder {
+	font-family: ProximaNova-Regular!important;
+}
+.fromGroup :last-child{
+	border-bottom: solid .5px #dce9ea!important;
+	outline: 0;
+}
+.formGroup2{
+	text-align: center;
+	margin-top: 40px;
+}
+.sing_up_for_free{
+	background-color: #fa0;
+	border-radius: 100px;
+	font-family: ProximaNova-Bold;
+	font-weight: 600;
+	font-size: 16px;
+	color: #fff;
+	letter-spacing: 0;
+	line-height: 31px;
+	text-transform: uppercase;
+	padding: 15px 30px;
+	text-align: center;
+	padding: 15px 50px;
+	margin-top: 30px;
+}
+.sing_up_for_free:hover {
+	background: #ffb300;
+	transition: 0s;
+}
+.forgotPasword{
+	font-family: ProximaNova-Semibold;
+	font-weight: 400;
+	font-size: 14px;
+	color: #80a0a9;
+	letter-spacing: 0;
+	line-height: 32px;
+	display: block;
+	margin-top: 20px;
+}
+.sinUpForm2{
+	color: #80a0a9;
+	margin: 30px auto 0;
+	max-width: 400px;
+	padding: 10px;
+	background-color: #fff;
+	text-transform: uppercase;
+	font-family: ProximaNova-Bold;
+	font-weight: 600;
+	font-size: 16px;
+	letter-spacing: 0;
+	line-height: 38px;
+	box-shadow: 0 10px 20px 0 rgba(128,160,169,.2);
+	border-radius: 5px;
+	text-align: center;
+}
