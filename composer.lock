@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c6580a6e52b6ca5321d54be00bbdfdf",
+    "content-hash": "4dce2689c5bb90b7220a26a6c2ee740f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2726,60 +2726,6 @@
             "time": "2018-10-04T13:18:27+00:00"
         },
         {
-            "name": "popov/zfc-status",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/popovserhii/zfc-status.git",
-                "reference": "5e01e5ccc8d41673bbc1f632279cf2b416c7205c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/popovserhii/zfc-status/zipball/5e01e5ccc8d41673bbc1f632279cf2b416c7205c",
-                "reference": "5e01e5ccc8d41673bbc1f632279cf2b416c7205c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5"
-            },
-            "type": "library",
-            "extra": {
-                "zf": {
-                    "component": "Popov\\ZfcStatus",
-                    "config-provider": "Popov\\ZfcStatus\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Popov\\ZfcStatus\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Serhii Popov",
-                    "email": "popow.serhii@gmail.com",
-                    "homepage": "http://stagem.com.ua/",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Vlad Kozak",
-                    "email": "vlad.gem.typ@gmail.com",
-                    "homepage": "http://stagem.com.ua/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Status Module for ZF3",
-            "keywords": [
-                "stagem",
-                "status"
-            ],
-            "time": "2018-06-15T12:43:48+00:00"
-        },
-        {
             "name": "popov/zfc-tab",
             "version": "dev-master",
             "source": {
@@ -3722,6 +3668,66 @@
                 "status"
             ],
             "time": "2019-01-09T15:06:35+00:00"
+        },
+        {
+            "name": "stagem/zfc-status",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stagemteam/zfc-status.git",
+                "reference": "26d05749b0de63f57fae99ec85ebf0d34631aa20"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stagemteam/zfc-status/zipball/26d05749b0de63f57fae99ec85ebf0d34631aa20",
+                "reference": "26d05749b0de63f57fae99ec85ebf0d34631aa20",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">7.0"
+            },
+            "type": "library",
+            "extra": {
+                "zf": {
+                    "component": "Stagem\\ZfcStatus",
+                    "config-provider": "Stagem\\ZfcStatus\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stagem\\ZfcStatus\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Serhii Popov",
+                    "email": "popow.serhii@gmail.com",
+                    "homepage": "http://stagem.com.ua/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Vlad Kozak",
+                    "email": "vlad.gem.typ@gmail.com",
+                    "homepage": "http://stagem.com.ua/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Andrey Andreev",
+                    "email": "andrey.anrdeev1995@gmail.com",
+                    "homepage": "http://stagem.com.ua/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Status Module for ZF3",
+            "keywords": [
+                "stagem",
+                "status"
+            ],
+            "time": "2019-02-19T11:56:41+00:00"
         },
         {
             "name": "stagem/zfc-system-config",
@@ -6967,7 +6973,7 @@
         "popov/zfc-user": 20,
         "popov/zfc-role": 20,
         "popov/zfc-permission": 20,
-        "popov/zfc-status": 20,
+        "stagem/zfc-status": 20,
         "popov/zfc-tab": 20,
         "stagem/zfc-cron": 20,
         "stagem/zfc-action": 20,

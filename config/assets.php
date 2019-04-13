@@ -23,7 +23,7 @@ return [
     // In debug mode allow you to combine all assets to one file.
     // 'combine' => false,
     // this is specific to this project
-    'webPath' => realpath('assets'),
+    'webPath' => realpath('public/assets'),
     'basePath' => 'assets',
     'default' => [
         'assets' => [
