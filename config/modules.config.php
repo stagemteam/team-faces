@@ -60,4 +60,5 @@ return [
     'Popov\ZfcTab',
     'Stagem\Picker',
     'Stagem\User',
+    'Stagem\Statistic',
 ];
