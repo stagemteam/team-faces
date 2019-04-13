@@ -15,11 +15,14 @@
 
 namespace Stagem\Picker\Action\Admin;
 
+use Popov\ZfcUser\Service\UserService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 #use Psr\Http\Server\RequestHandlerInterface;
+use Stagem\Picker\Service\PickerService;
 use Zend\Router\RouteMatch;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Stagem\ZfcAction\Page\AbstractAction;
 use Zend\View\View;
@@ -30,13 +33,13 @@ use Zend\View\View;
 class PickAction extends AbstractAction
 {
 
-    protected $bestsellerTable;
+    protected $pickerService;
 
     protected $bestsellerGrid;
 
-    public function __construct(/*BestsellerTable $bestsellerTable, BestsellerGrid $bestsellerGrid*/)
+    public function __construct(PickerService $pickerService/*, BestsellerGrid $bestsellerGrid*/)
     {
-        //$this->bestsellerTable = $bestsellerTable;
+        $this->pickerService = $pickerService;
         //$this->bestsellerGrid = $bestsellerGrid;
     }
 
@@ -47,19 +50,28 @@ class PickAction extends AbstractAction
 
     public function action(ServerRequestInterface $request)
     {
-        /*$route = $request->getAttribute(RouteMatch::class);
-        $select = $this->bestsellerTable->getLastMonthBestsellers();
+        if ($request->getMethod() == self::METHOD_POST) {
+            $fields = $request->getParsedBody();
+            $guessed = $this->pickerService->find($id = (int) $fields['guessed']);
+            $picked = $this->pickerService->find($id = (int) $fields['picked']);
 
-        $this->bestsellerGrid->setCounter($this->bestsellerTable->getLastMonthDistinctCounter());
-        $this->bestsellerGrid->init();
-        $dataGrid = $this->bestsellerGrid->getDataGrid();
-        $dataGrid->setUrl($this->url()->fromRoute($route->getMatchedRouteName(), $route->getParams()));
-        $dataGrid->setDataSource($select, $this->bestsellerTable->getAdapter());
-        $dataGrid->render();
-        $dataGridVm = $dataGrid->getResponse();
 
-        return $dataGridVm;*/
+            $code = 200;
+            if ($guessed && $picked && ($guessed === $picked)) {
+                $message = 'User successfully was guessed';
+                // success guess
+            } else {
+                $code = 400;
+                $message = 'Guess of user is failed';
+            }
 
-        return new ViewModel();
+            return new JsonModel(['message' => $message, 'code' => $code]);
+            //$this->mainObjectService->saveMainObject($formObject);
+            //$message = 'Something went wrong';
+        }
+
+        $users = $this->pickerService->getRandomUsers();
+
+        return new ViewModel(['users' => $users]);
     }
 }

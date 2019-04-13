@@ -12,7 +12,6 @@
  */
 return [
     'Stagem\ZfcMenu',
-    'Stagem\ZfcStatus',
     'WhoopsErrorHandler',
     'Zend\Db',
     'Zend\Form',
@@ -59,5 +58,5 @@ return [
     #'Popov\ZfcStatus',
     'Popov\ZfcTab',
     'Stagem\Picker',
-    'Stagem\User',
+    //'Stagem\User',
 ];

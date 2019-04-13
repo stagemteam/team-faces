@@ -16,6 +16,7 @@
 namespace Stagem\Picker;
 
 return [
+    'assetic_configuration' => require_once 'assets.config.php',
 
     'actions' => [
         'picker' => __NAMESPACE__ . '\Action',
