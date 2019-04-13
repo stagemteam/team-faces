@@ -34,6 +34,16 @@ return [
         ],
     ],
 
+    'view_helpers' => [
+        'aliases' => [
+            'user' => View\Helper\PickerHelper::class,
+        ],
+        //'factories' => [
+        'invokables' => [
+            View\Helper\PickerHelper::class => View\Helper\PickerHelper::class,
+        ]
+    ],
+
     'view_manager' => [
         'prefix_template_path_stack' => [
             'picker::' => __DIR__ . '/../view',
