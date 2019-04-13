@@ -58,6 +58,6 @@ return [
     #'Popov\ZfcStatus',
     'Popov\ZfcTab',
     'Stagem\Picker',
-    //'Stagem\User',
+    'Stagem\User',
     'Stagem\Statistic',
 ];
