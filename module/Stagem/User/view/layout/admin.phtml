@@ -1,0 +1,37 @@
+<?= $this->doctype() ?>
+<?php
+//$controller = $this->layout()->route ? $this->layout()->route->getParam('controller') : '';
+//$action = $this->layout()->route ? $this->layout()->route->getParam('action') : '';
+//$parent = $this->layout()->route ? $this->layout()->route->getParam('parent') : '';
+
+//$cookie = $this->layout()->request ? $this->layout()->request->getCookie() : '';
+
+$title = $this->sysConfig('general/info/system_name');
+?>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!--<meta name="author" content="Stagem Company" />
+    <meta name="description" content="Stagem Cloud - Business System" />
+    <meta name="keywords" content="e-commerce" />
+    <meta name="application-name" content="Stagem Cloud - Business System" />-->
+
+    <?= $this->headTitle($title)->setSeparator(' - ')->setAutoEscape(false) ?>
+    <?= $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+    <?= $this->headLink() ?>
+    <?= $this->headStyle() ?>
+</head>
+<body>
+<?php // main content ?>
+
+
+
+
+<?php // Include all JS ?>
+<?= $this->headScript() ?>
+<?= $this->inlineScript() ?>
+</body>
+</html>
