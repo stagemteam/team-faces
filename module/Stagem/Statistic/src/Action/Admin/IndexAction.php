@@ -72,6 +72,17 @@ class IndexAction extends AbstractAction
 
         $this->statisticService->userStatistic($this->user()->current());
 
-        return new ViewModel();
+        $data = [
+            'label' => 'asd',
+            'backgroundColor' => 'rgb(255, 99, 132)',
+            'borderColor' => 'rgb(255, 99, 132)',
+            'data' => [
+                3,2,4,4,5,
+            ],
+        ];
+
+        return new ViewModel([
+            'dataset' => $data
+        ]);
     }
 }
