@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineORMModule\Migrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20190413225037 extends AbstractMigration
+{
+    public function getDescription() : string
+    {
+        return '';
+    }
+
+    public function up(Schema $schema) : void
+    {
+        $this->addSql('ALTER TABLE `user`
+MODIFY COLUMN `phone`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL AFTER `patronymic`,
+MODIFY COLUMN `phoneWork`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL AFTER `phone`,
+MODIFY COLUMN `phoneInternal`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL AFTER `phoneWork`');
+        // this up() migration is auto-generated, please modify it to your needs
+
+    }
+
+    public function down(Schema $schema) : void
+    {
+        // this down() migration is auto-generated, please modify it to your needs
+
+    }
+}
