@@ -97,13 +97,13 @@
   ],
   "autoload": {
     "psr-4": {
+      "Stagem\\User\\": "module/Stagem/User/src/",
       "Stagem\\Picker\\": "module/Stagem/Picker/src/",
       "Stagem\\Statistic\\": "module/Stagem/Statistic/src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Stagem\\User\\": "module/Stagem/User/src/"
     }
   },
   "extra": [],

@@ -16,6 +16,7 @@
 namespace Stagem\Picker\Service;
 
 use Popov\ZfcCore\Service\DomainServiceAbstract;
+use Popov\ZfcUser\Helper\UserHelper;
 use Popov\ZfcUser\Model\Repository\UserRepository;
 use Popov\ZfcUser\Model\User;
 
@@ -28,15 +29,29 @@ class PickerService extends DomainServiceAbstract
     protected $entity = User::class;
 
     /**
+     * @var UserHelper
+     */
+    protected $userHelper;
+
+    public function __construct(UserHelper $userHelper)
+    {
+        $this->userHelper = $userHelper;
+    }
+
+    /**
      * @return User[]
      */
     public function getRandomUsers()
     {
-        $max = 8;
+        $max = 152;
         $qb = $this->getRepository()->getUsers();
-        $qb->where($qb->expr()->in(User::MNEMO . '.id', '?1'));
+        $qb->andWhere($qb->expr()->in(User::MNEMO . '.id', '?1'));
+        $qb->andWhere($qb->expr()->notIn(User::MNEMO . '.id', '?2'));
         // Performance optimization
-        $qb->setParameters([1 => [rand(1, $max), rand(0, $max), rand(0, $max), rand(0, $max), rand(0, $max), rand(0, $max)]])
+        $qb->setParameters([
+            1 => [rand(1, $max), rand(0, $max), rand(0, $max), rand(0, $max), rand(0, $max), rand(0, $max)],
+            2 => $this->userHelper->current()
+        ])
             ->setMaxResults(3);
 
         return $qb->getQuery()->getResult();

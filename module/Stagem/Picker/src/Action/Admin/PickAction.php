@@ -15,32 +15,38 @@
 
 namespace Stagem\Picker\Action\Admin;
 
-use Popov\ZfcUser\Service\UserService;
+use DateTime;
+use Popov\ZfcUser\Model\User;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 #use Psr\Http\Server\RequestHandlerInterface;
 use Stagem\Picker\Service\PickerService;
-use Zend\Router\RouteMatch;
+use Stagem\Statistic\Model\Statistic;
+use Stagem\Statistic\Service\StatisticService;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Stagem\ZfcAction\Page\AbstractAction;
-use Zend\View\View;
 
 /**
  * @package Stagem_Picker
  */
 class PickAction extends AbstractAction
 {
-
+    /**
+     * @var PickerService
+     */
     protected $pickerService;
 
-    protected $bestsellerGrid;
+    /**
+     * @var StatisticService
+     */
+    protected $statisticService;
 
-    public function __construct(PickerService $pickerService/*, BestsellerGrid $bestsellerGrid*/)
+    public function __construct(PickerService $pickerService, StatisticService $statisticService)
     {
         $this->pickerService = $pickerService;
-        //$this->bestsellerGrid = $bestsellerGrid;
+        $this->statisticService = $statisticService;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -52,22 +58,31 @@ class PickAction extends AbstractAction
     {
         if ($request->getMethod() == self::METHOD_POST) {
             $fields = $request->getParsedBody();
+            /** @var User $guessed */
             $guessed = $this->pickerService->find($id = (int) $fields['guessed']);
+            /** @var User $picked */
             $picked = $this->pickerService->find($id = (int) $fields['picked']);
 
+            $statistic = $this->statisticService->getObjectModel();
+            $statistic->setCheckedAt(new DateTime())
+                ->setUser($this->user()->current())
+                ->setUserToGuess($guessed)
+                ->setUserToPick($picked)
+            ;
 
             $code = 200;
             if ($guessed && $picked && ($guessed === $picked)) {
                 $message = 'User successfully was guessed';
-                // success guess
+                $statistic->setStatus(Statistic::STATUS_SUCCESS);
             } else {
                 $code = 400;
                 $message = 'Guess of user is failed';
+                $statistic->setStatus(Statistic::STATUS_FAIL);
             }
 
+            $this->statisticService->getObjectManager()->flush();
+
             return new JsonModel(['message' => $message, 'code' => $code]);
-            //$this->mainObjectService->saveMainObject($formObject);
-            //$message = 'Something went wrong';
         }
 
         $users = $this->pickerService->getRandomUsers();
