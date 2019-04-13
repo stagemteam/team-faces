@@ -97,7 +97,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "Stagem\\Picker\\": "module/Stagem/Picker/src/"
+      "Stagem\\Picker\\": "module/Stagem/Picker/src/",
+      "Stagem\\Statistic\\": "module/Stagem/Statistic/src/"
     }
   },
   "autoload-dev": {
