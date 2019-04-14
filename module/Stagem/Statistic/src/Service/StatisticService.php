@@ -19,6 +19,7 @@ use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Popov\ZfcCore\Service\DomainServiceAbstract;
+use Popov\ZfcUser\Model\User;
 use Stagem\Order\Model\Repository\StatisticRepository;
 use Stagem\Statistic\Model\Statistic;
 
@@ -68,5 +69,11 @@ class StatisticService extends DomainServiceAbstract
             $statisticDashboard ['successful'] / $statisticDashboard ['total'] * 100;
 
         return $statisticDashboard;
+    }
+
+    public function getAllUsers()
+    {
+        $data = $this->getObjectManager()->getRepository(User::class)->findAll();
+        return $data;
     }
 }

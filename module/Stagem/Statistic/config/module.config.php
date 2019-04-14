@@ -25,6 +25,7 @@ return [
 
     'actions' => [
         'statistic' => __NAMESPACE__ . '\Action',
+        'statistic-grid' => __NAMESPACE__ . '\Action\Grid',
     ],
 
     'view_manager' => [
