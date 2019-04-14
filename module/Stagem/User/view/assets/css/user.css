@@ -127,5 +127,16 @@ body.user-login{
 	position: relative;
 	left: 45%;
 	top: 16px;
+}
 
+.profile_background {
+	background-image: url(../img/profile.png);
+	background-size: 100vw 100vh;
+	height: 100vh;
+}
+
+.tf {
+	position: relative;
+	left: 32%;
+	top: 25%;
 }

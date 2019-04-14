@@ -1,0 +1,6 @@
+<<<<<<< HEAD
+d
+=======
+<?php
+die(__FILE__ . __LINE__);
+>>>>>>> 9d0ba3b0f7625ba4db27f68da5ac730dee4a8072
