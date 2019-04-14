@@ -70,7 +70,10 @@ class IndexAction extends AbstractAction
 
         $data = [];
 
-        $this->statisticService->userStatistic($this->user()->current());
+        $data = $this->statisticService->userStatistic($this->user()->current());
+
+        $dashboardData =$this->statisticService->userDashboardData($data);
+
 
         $data = [
             'label' => 'asd',
@@ -82,7 +85,8 @@ class IndexAction extends AbstractAction
         ];
 
         return new ViewModel([
-            'dataset' => $data
+            'dataset' => $data,
+            'dashboard' => $dashboardData
         ]);
     }
 }

@@ -43,30 +43,31 @@ class StatisticService extends DomainServiceAbstract
      */
     public function userStatistic($user)
     {
-        //$id = is_scalar($order) ? $order : $order->getId();
-//        $qb = $this->getObjectManager()->createQueryBuilder();
-//        $query = $qb->update(Order::class, Order::MNEMO)
-//            ->set(Order::MNEMO . '.status', '?1')
-//            ->set(Order::MNEMO . '.isParsed', '?2')
-//            ->where(Order::MNEMO . '.id = ?3')
-//            ->setParameters([1 => 'Canceled', 2 => 1, 3 => $id])
-//            ->getQuery();
-//        $query->execute();
         //we will get last 30 days
-
         $endedAt = new DateTime('now');
         $startedAt = new DateTime('-30 days');
-
         $data = $this->getRepository()->getStatisticForUser($startedAt, $endedAt, $user);
-
-//        $chartData = [
-//            'labels' => ['a', 'b', 'c'],
-//            'datasets' =>
-//        ];
-
-
-
 
         return $data;
     }
+
+    public function userDashboardData($data)
+    {
+        $statisticDashboard = [
+            'total' => 0,
+            'successful' => 0,
+            'failed' => 0,
+            'involvementRate' => 0.0,
+        ];
+        $statisticDashboard ['total'] = count($data);
+        foreach ($data as $item) {
+            $statisticDashboard ['successful'] += $item->getStatus();
+            $statisticDashboard ['failed'] += $item->getStatus();
+        }
+        $statisticDashboard['involvementRate'] =
+            $statisticDashboard ['successful'] / $statisticDashboard ['total'] * 100;
+
+        return $statisticDashboard;
+    }
+
 }
