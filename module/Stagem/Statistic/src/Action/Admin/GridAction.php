@@ -1,0 +1,68 @@
+<?php
+    /**
+     * The MIT License (MIT)
+     * Copyright (c) 2018 Stagem Team
+     * This source file is subject to The MIT License (OSL 3.0)
+     * that is bundled with this package in the file LICENSE.txt.
+     * It is also available through the world-wide-web at this URL:
+     * https://opensource.org/licenses/MIT
+     *
+     * @category Stagem
+     * @package Stagem_Amazon
+     * @author Serhii Popov <popow.serhii@gmail.com>
+     * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+     */
+
+namespace Stagem\Statistic\Action\Admin;
+
+    use Psr\Http\Message\ResponseInterface;
+    use Psr\Http\Message\ServerRequestInterface;
+    use Interop\Http\Server\RequestHandlerInterface;
+    #use Psr\Http\Server\RequestHandlerInterface;
+    use Stagem\Statistic\Service\StatisticService;
+    use Stagem\Statistic\Service\UserService;
+    use Zend\Router\RouteMatch;
+    use Zend\View\Model\ViewModel;
+    use Stagem\ZfcAction\Page\AbstractAction;
+    use Zend\View\View;
+
+    /**
+     * @package Stagem_Statistic
+     */
+class GridAction extends AbstractAction
+{
+    /** @var StatisticService */
+    protected $statisticService;
+
+
+    public function __construct(StatisticService $statisticService)
+    {
+        $this->statisticService = $statisticService;
+    }
+
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        return $handler->handle($request->withAttribute(ViewModel::class, $this->action($request)));
+    }
+
+    public function action(ServerRequestInterface $request)
+    {
+        $data = [];
+
+        //$data = $this->statisticService->userStatistic($this->user()->current());
+
+        //$dashboardData =$this->statisticService->userDashboardData($data);
+
+        $users = $this->statisticService->getAllUsers();
+
+        $usersByOffice = [];
+        foreach ($users as $user){
+            if (!empty($user->getPost())){
+                $post = json_decode($user->getPost(), true);
+                $usersByOffice[str_replace(" ", '', $post['project_group_title'])][] = $user;
+            }
+        }
+
+        return new ViewModel();
+    }
+}

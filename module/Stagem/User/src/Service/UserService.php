@@ -19,23 +19,16 @@ use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Popov\ZfcCore\Service\DomainServiceAbstract;
-use Popov\ZfcUser\Model\User;
 use Stagem\Order\Model\Repository\StatisticRepository;
 use Stagem\Statistic\Model\Statistic;
 
 /**
- * @method StatisticRepository getRepository()
- * @method Statistic getObjectModel()
  * @method EntityManager getObjectManager()
  */
-class StatisticService extends DomainServiceAbstract
+class UserService extends DomainServiceAbstract
 {
     protected $entity = Statistic::class;
 
-//    public function getOrders($marketplace = null)
-//    {
-//        return $this->getRepository()->getOrders($marketplace);
-//    }
 
     /**
      * This method changes order status after parsing in order to know
@@ -70,11 +63,5 @@ class StatisticService extends DomainServiceAbstract
             $statisticDashboard ['successful'] / $statisticDashboard ['total'] * 100;
 
         return $statisticDashboard;
-    }
-
-    public function getAllUsers()
-    {
-        $data = $this->getObjectManager()->getRepository(User::class)->findAll();
-        return $data;
     }
 }
