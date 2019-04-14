@@ -274,3 +274,24 @@
 	align-items: center;
 	font-size: 12px;
 }
+.tab{
+	display: none;
+}
+.tab.active{
+	display: block;
+}
+.switchers{
+	text-align: center;
+	cursor: pointer;
+}
+.switch1, .switch2{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	transform: rotate(-180deg);
+	border-radius: 50px;
+	background: #C4C4C4;
+}
+.switch1.active, .switch2.active{
+	background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
+}

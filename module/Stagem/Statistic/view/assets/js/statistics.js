@@ -49,3 +49,18 @@ jQuery( document ).ready(function() {
 jQuery( document ).ready(function() {
   jQuery('#statistic_first_popup').modal('show');
 });
+
+jQuery( document ).ready(function() {
+  jQuery('.switch1').on('click', function () {
+    jQuery(this).addClass('active');
+    jQuery('.switch2').removeClass('active');
+    jQuery('.first-tab').addClass('active');
+    jQuery('.second-tab').removeClass('active');
+  });
+  jQuery('.switch2').on('click', function () {
+    jQuery(this).addClass('active');
+    jQuery('.second-tab').addClass('active');
+    jQuery(".switch1").removeClass('active');
+    jQuery('.first-tab').removeClass('active');
+  });
+});
