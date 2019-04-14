@@ -8,7 +8,7 @@
  * https://opensource.org/licenses/MIT
  *
  * @category Stagem
- * @package Stagem_Shipment
+ * @package Stagem_Statistic
  * @author Serhii Popov <popow.serhii@gmail.com>
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  */
@@ -19,15 +19,8 @@ return [
 
     'assetic_configuration' => require_once 'assets.config.php',
 
-    //'cron' => require 'cron.config.php',
-
-    //'importer' => require 'importer.config.php',
-
-    //'navigation' => require 'navigation.config.php',
-
     'actions' => [
         'statistic' => __NAMESPACE__ . '\Action',
-        'statistic-grid' => __NAMESPACE__ . '\Action\Grid',
     ],
 
     'view_manager' => [
