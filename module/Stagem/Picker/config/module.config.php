@@ -22,18 +22,6 @@ return [
         'picker' => __NAMESPACE__ . '\Action',
     ],
 
-    'service_manager' => [
-        'aliases' => [
-        //    'MarketplaceService' => Service\MarketplaceService::class,
-        ],
-        'invokables' => [//   Service\MarketplaceService::class => Service\MarketplaceService::class,
-        ],
-        'factories' => [
-            //Model\Table\BestsellerTable::class => TableFactory::class,
-            //Action\Dashboard\Admin\TopRatedAction::class => Action\Dashboard\Admin\Factory\TopRatedActionFactory::class,
-        ],
-    ],
-
     'view_helpers' => [
         'aliases' => [
             'picker' => View\Helper\PickerHelper::class,

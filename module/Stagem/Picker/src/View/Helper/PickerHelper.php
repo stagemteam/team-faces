@@ -8,17 +8,16 @@
  * https://opensource.org/licenses/MIT
  *
  * @category Stagem
- * @package Popov_<package>
+ * @package Stagem_Picker
  * @author Serhii Popov <popow.serhii@gmail.com>
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
 namespace Stagem\Picker\View\Helper;
 
-use Stagem\Picker\Service\PickerService;
+use Exception;
 use Zend\View\Helper\AbstractHelper;
-use Popov\Simpler\SimplerHelper;
-use Popov\ZfcUser\Helper\UserHelper as BaseUserHelper;
+use Stagem\Picker\Service\PickerService;
 use Popov\ZfcUser\Model\User;
 
 class PickerHelper extends AbstractHelper
@@ -29,13 +28,11 @@ class PickerHelper extends AbstractHelper
     protected $pickerService;
 
     /**
-     * @var
+     * @var User
      */
     protected $guessedUser;
 
     /**
-     * PickerHelper constructor.
-     *
      * @param PickerService $pickerService
      */
     public function __construct(PickerService $pickerService)
@@ -46,7 +43,7 @@ class PickerHelper extends AbstractHelper
     public function getGuessedUser()
     {
         if (!$this->guessedUser) {
-            $this->guessedUser = $this->pickerService->getRandomUser();
+            $this->guessedUser = $this->pickerService->getRandomUser() ?: $this->pickerService->getObjectModel();
         }
 
         return $this->guessedUser;
@@ -57,12 +54,14 @@ class PickerHelper extends AbstractHelper
      */
     public function getUsers()
     {
-        $guessedUser = $this->getGuessedUser();
-        $users = $this->pickerService->getRandomUsers($guessedUser);
-
-
-        array_push($users, $this->getGuessedUser());
-        shuffle($users);
+        try {
+            $guessedUser = $this->getGuessedUser();
+            $users = $this->pickerService->getRandomUsers($guessedUser);
+            array_push($users, $this->getGuessedUser());
+            shuffle($users);
+        } catch (Exception $e) {
+            $users = [];
+        }
 
         return $users;
     }
@@ -73,5 +72,4 @@ class PickerHelper extends AbstractHelper
 
         return $extra[$field] ?? null;
     }
-
 }

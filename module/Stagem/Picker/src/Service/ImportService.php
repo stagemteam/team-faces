@@ -19,9 +19,6 @@ use Doctrine\ORM\QueryBuilder;
 use Popov\Db\Db;
 use Popov\ZfcCore\Service\DomainServiceAbstract;
 
-/**
- * @method CustomerRepository getRepository()
- */
 class ImportService extends DomainServiceAbstract
 {
     /**
@@ -29,20 +26,19 @@ class ImportService extends DomainServiceAbstract
      */
     protected $db;
 
-    public function __construct(Db $db)
-    {
-        $this->db = $db;
-    }
-
     protected $mediaparkGroupId = [
         2,
         111,
         210,
     ];
 
+    public function __construct(Db $db)
+    {
+        $this->db = $db;
+    }
+
     public function import($userData)
     {
-        $pdo = $this->db->getPdo();
         $rows = [];
         foreach ($userData['data'] as $data) {
             if ($data['enabled'] != 0 && in_array($data['project_group_id'], $this->mediaparkGroupId)) {
@@ -79,49 +75,5 @@ class ImportService extends DomainServiceAbstract
         $this->db->multipleSave('user', $rows);
 
         echo 1;
-    }
-
-    public function updateTable()
-    {
-        $pdo = $this->db->getPdo();
-        $marketplaceQuery = $pdo->query('SELECT id, code FROM amazon_marketplace', $pdo::FETCH_ASSOC);
-        $marketplaces = $marketplaceQuery->fetchAll($pdo::FETCH_ASSOC);
-        $tempMarketplace = [];
-        foreach ($marketplaces as $key => $value) {
-            $tempMarketplace[$value['code']] = $value['id'];
-        }
-        $productQuery = $pdo->query('SELECT id, asin FROM amazon_product', $pdo::FETCH_ASSOC);
-        $products = $productQuery->fetchAll($pdo::FETCH_ASSOC);
-        $tempProduct = [];
-        foreach ($products as $key => $value) {
-            $tempProduct[$value['asin']] = $value['id'];
-        }
-        $end = $pdo->query('SELECT COUNT(*) as count FROM amazon_product_history')->fetchColumn();
-        $count = 0;
-        $limit = 10000;
-        $offset = 0;
-        while ($offset < $end) {
-            $res =
-                $pdo->query("SELECT * FROM amazon_product_history LIMIT {$limit} OFFSET {$offset}", $pdo::FETCH_ASSOC);
-            $rows = $res->fetchAll($pdo::FETCH_ASSOC);
-            foreach ($rows as $i => $row) {
-                //$productKey = array_search($row['asin'], array_column($products, 'asin'));
-                if ($row['asin']) {
-                    $row['productId'] = $tempProduct[$row['asin']];
-                } else {
-                    $row['productId'] = null;
-                }
-                //$marketplaceKey = array_search($row['marketplaceCode'], array_column($marketplaces, 'code'));
-                if ($row['marketplaceCode']) {
-                    $row['marketplaceId'] = $tempMarketplace[$row['marketplaceCode']];
-                } else {
-                    $row['marketplaceId'] = null;
-                }
-                $offset++;
-                $rows[$i] = $row;
-                $count++;
-            }
-            $this->db->multipleSave('amazon_product_history', $rows);
-        }
     }
 }

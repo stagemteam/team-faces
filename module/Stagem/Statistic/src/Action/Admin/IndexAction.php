@@ -1,37 +1,33 @@
 <?php
-    /**
-     * The MIT License (MIT)
-     * Copyright (c) 2018 Stagem Team
-     * This source file is subject to The MIT License (OSL 3.0)
-     * that is bundled with this package in the file LICENSE.txt.
-     * It is also available through the world-wide-web at this URL:
-     * https://opensource.org/licenses/MIT
-     *
-     * @category Stagem
-     * @package Stagem_Amazon
-     * @author Serhii Popov <popow.serhii@gmail.com>
-     * @license https://opensource.org/licenses/MIT The MIT License (MIT)
-     */
+/**
+ * The MIT License (MIT)
+ * Copyright (c) 2018 Stagem Team
+ * This source file is subject to The MIT License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/MIT
+ *
+ * @category Stagem
+ * @package Stagem_Amazon
+ * @author Serhii Popov <popow.serhii@gmail.com>
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ */
 
 namespace Stagem\Statistic\Action\Admin;
 
-    use Psr\Http\Message\ResponseInterface;
-    use Psr\Http\Message\ServerRequestInterface;
-    use Interop\Http\Server\RequestHandlerInterface;
-    #use Psr\Http\Server\RequestHandlerInterface;
-    use Stagem\Statistic\Service\StatisticService;
-    use Stagem\Statistic\Service\UserService;
-    use Zend\Router\RouteMatch;
-    use Zend\View\Model\ViewModel;
-    use Stagem\ZfcAction\Page\AbstractAction;
-    use Zend\View\View;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Interop\Http\Server\RequestHandlerInterface;
+#use Psr\Http\Server\RequestHandlerInterface;
+use Stagem\Statistic\Service\StatisticService;
+use Zend\View\Model\ViewModel;
+use Stagem\ZfcAction\Page\AbstractAction;
 
-    /**
-     * @package Stagem_Statistic
-     */
+/**
+ * @package Stagem_Statistic
+ */
 class IndexAction extends AbstractAction
 {
-
     protected $bestsellerTable;
 
     protected $bestsellerGrid;
@@ -39,10 +35,10 @@ class IndexAction extends AbstractAction
     /** @var StatisticService */
     protected $statisticService;
 
-
     public function __construct(
         StatisticService $statisticService
-        /*BestsellerTable $bestsellerTable, BestsellerGrid $bestsellerGrid*/)
+        /*BestsellerTable $bestsellerTable, BestsellerGrid $bestsellerGrid*/
+    )
     {
         $this->statisticService = $statisticService;
         //$this->bestsellerTable = $bestsellerTable;
@@ -68,26 +64,25 @@ class IndexAction extends AbstractAction
         $dataGridVm = $dataGrid->getResponse();
 
         return $dataGridVm;*/
-
         $data = [];
-
         $data = $this->statisticService->guessingUserStatistic($this->user()->current());
-
-        $dashboardData =$this->statisticService->userDashboardData($data);
-
-
+        $dashboardData = $this->statisticService->userDashboardData($data);
         $data = [
             'label' => 'asd',
             'backgroundColor' => 'rgb(255, 99, 132)',
             'borderColor' => 'rgb(255, 99, 132)',
             'data' => [
-                3,2,4,4,5,
+                3,
+                2,
+                4,
+                4,
+                5,
             ],
         ];
 
         return new ViewModel([
             'dataset' => $data,
-            'dashboard' => $dashboardData
+            'dashboard' => $dashboardData,
         ]);
     }
 }
