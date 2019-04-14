@@ -18,10 +18,10 @@
 	width: 68%;
 	margin-left: auto;
 }
-.user:nth-child(9n+3){
+.user:nth-child(9n+4){
 	flex-basis: 27%;
 }
-.user:nth-child(9n+3) .user-statistic-info{
+.user:nth-child(9n+4) .user-statistic-info{
 	width: 68%;
 	margin-right: auto;
 }
