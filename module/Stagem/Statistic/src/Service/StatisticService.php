@@ -25,6 +25,7 @@ use Stagem\Statistic\Model\Statistic;
 
 /**
  * @method StatisticRepository getRepository()
+ * @method Statistic getObjectModel()
  * @method EntityManager getObjectManager()
  */
 class StatisticService extends DomainServiceAbstract

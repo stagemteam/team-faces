@@ -15,29 +15,40 @@
 
 namespace Stagem\Picker\Action\Admin;
 
+use DateTime;
+use Popov\ZfcUser\Model\User;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 #use Psr\Http\Server\RequestHandlerInterface;
+use Stagem\Picker\Service\PickerService;
+use Stagem\Statistic\Model\Statistic;
+use Stagem\Statistic\Service\StatisticService;
+use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Router\RouteMatch;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Stagem\ZfcAction\Page\AbstractAction;
-use Zend\View\View;
 
 /**
  * @package Stagem_Picker
  */
 class PickAction extends AbstractAction
 {
+    /**
+     * @var PickerService
+     */
+    protected $pickerService;
 
-    protected $bestsellerTable;
+    /**
+     * @var StatisticService
+     */
+    protected $statisticService;
 
-    protected $bestsellerGrid;
-
-    public function __construct(/*BestsellerTable $bestsellerTable, BestsellerGrid $bestsellerGrid*/)
+    public function __construct(PickerService $pickerService, StatisticService $statisticService)
     {
-        //$this->bestsellerTable = $bestsellerTable;
-        //$this->bestsellerGrid = $bestsellerGrid;
+        $this->pickerService = $pickerService;
+        $this->statisticService = $statisticService;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -47,19 +58,39 @@ class PickAction extends AbstractAction
 
     public function action(ServerRequestInterface $request)
     {
-        /*$route = $request->getAttribute(RouteMatch::class);
-        $select = $this->bestsellerTable->getLastMonthBestsellers();
+        if ($request->getMethod() == self::METHOD_POST) {
+            $fields = $request->getParsedBody();
+            /** @var User $guessed */
+            $guessed = $this->pickerService->find($id = (int) $fields['guessed']);
+            /** @var User $picked */
+            $picked = $this->pickerService->find($id = (int) $fields['picked']);
 
-        $this->bestsellerGrid->setCounter($this->bestsellerTable->getLastMonthDistinctCounter());
-        $this->bestsellerGrid->init();
-        $dataGrid = $this->bestsellerGrid->getDataGrid();
-        $dataGrid->setUrl($this->url()->fromRoute($route->getMatchedRouteName(), $route->getParams()));
-        $dataGrid->setDataSource($select, $this->bestsellerTable->getAdapter());
-        $dataGrid->render();
-        $dataGridVm = $dataGrid->getResponse();
+            $statistic = $this->statisticService->getObjectModel();
+            $statistic->setCheckedAt(new DateTime())
+                ->setUser($this->user()->current())
+                ->setUserToGuess($guessed)
+                ->setUserToPick($picked)
+            ;
 
-        return $dataGridVm;*/
+            $code = 200;
+            if ($guessed && $picked && ($guessed === $picked)) {
+                $message = 'User successfully was guessed';
+                $statistic->setStatus(Statistic::STATUS_SUCCESS);
+            } else {
+                $code = 400;
+                $message = 'Guess of user is failed';
+                $statistic->setStatus(Statistic::STATUS_FAIL);
+            }
 
-        return new ViewModel();
+            $this->statisticService->getObjectManager()->flush();
+
+            return new JsonModel(['message' => $message, 'code' => $code]);
+        }
+
+        //$users = $this->pickerService->getRandomUsers();
+
+        //return new ViewModel(['users' => $users]);
+
+        return new EmptyResponse();
     }
 }

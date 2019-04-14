@@ -12,7 +12,6 @@
  */
 return [
     'Stagem\ZfcMenu',
-    'Stagem\ZfcStatus',
     'WhoopsErrorHandler',
     'Zend\Db',
     'Zend\Form',

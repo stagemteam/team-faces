@@ -13,7 +13,18 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  */
 ?>
-
+<?php /** @var \Popov\ZfcUser\Model\User[] $users */ ?>
+<?php $users = $this->vars('users'); ?>
+<?php $guessed = $users[rand(0, count($users) - 1)]; ?>
 <div>
+	<form id="picker-form">
+		<?php //@todo Remember ID of searchable user in session ?>
+		<input type="text" id="user" name="user" value="<?= $guessed->getId() ?>" />
 
+		<div>Here must be user photo</div>
+
+		<?php foreach ($users as $user) : ?>
+			<div><a href="#" class="picked" data-id="<?= $user->getId() ?>"><?= $user->getFullName() ?></a></div>
+		<?php endforeach; ?>
+	</form>
 </div>

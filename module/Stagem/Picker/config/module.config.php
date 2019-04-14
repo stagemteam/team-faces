@@ -16,6 +16,7 @@
 namespace Stagem\Picker;
 
 return [
+    'assetic_configuration' => require_once 'assets.config.php',
 
     'actions' => [
         'picker' => __NAMESPACE__ . '\Action',
@@ -33,7 +34,19 @@ return [
         ],
     ],
 
+    'view_helpers' => [
+        'aliases' => [
+            'picker' => View\Helper\PickerHelper::class,
+        ],
+        'factories' => [
+            View\Helper\PickerHelper::class => View\Helper\Factory\PickerHelperFactory::class,
+        ]
+    ],
+
     'view_manager' => [
+        'template_map' => [
+            'widget::picker' => __DIR__ . '/../view/widget/picker.phtml',
+        ],
         'prefix_template_path_stack' => [
             'picker::' => __DIR__ . '/../view',
         ],

@@ -22,7 +22,7 @@ use Popov\ZfcUser\Model\User;
 
 /**
  * @ORM\Entity(repositoryClass="Stagem\Statistic\Model\Repository\StatisticRepository")
- * @ORM\Table(name="statistic")
+ * @ORM\Table(name="user_statistic")
  */
 class Statistic
 {
@@ -30,7 +30,11 @@ class Statistic
 
     const MNEMO = 'statistic';
 
-    const TABLE = 'statistic';
+    const TABLE = 'user_statistic';
+
+    const STATUS_SUCCESS = 1;
+
+    const STATUS_FAIL = 0;
 
     /**
      * @var int
@@ -53,11 +57,22 @@ class Statistic
     private $checkedAt;
 
     /**
+     * User who we should to guess
+     *
      * @var User
      * @ORM\ManyToOne(targetEntity="Popov\ZfcUser\Model\User")
      * @ORM\JoinColumn(name="userToGuessId", referencedColumnName="id", nullable=false)
      */
     private $userToGuess;
+
+    /**
+     * User who we pick up
+     *
+     * @var User
+     * @ORM\ManyToOne(targetEntity="Popov\ZfcUser\Model\User")
+     * @ORM\JoinColumn(name="userToPickId", referencedColumnName="id", nullable=false)
+     */
+    private $userToPick;
 
     /**
      * @var User
@@ -69,83 +84,116 @@ class Statistic
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
      * @param int $id
+     * @return Statistic
      */
-    public function setId($id)
+    public function setId(int $id): Statistic
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
 
     /**
      * @param string $status
+     * @return Statistic
      */
-    public function setStatus($status)
+    public function setStatus(string $status): Statistic
     {
         $this->status = $status;
+
+        return $this;
     }
 
     /**
      * @return DateTime
      */
-    public function getCheckedAt()
+    public function getCheckedAt(): DateTime
     {
         return $this->checkedAt;
     }
 
     /**
      * @param DateTime $checkedAt
+     * @return Statistic
      */
-    public function setCheckedAt($checkedAt)
+    public function setCheckedAt(DateTime $checkedAt): Statistic
     {
         $this->checkedAt = $checkedAt;
+
+        return $this;
     }
 
     /**
      * @return User
      */
-    public function getUserToGuess()
+    public function getUserToGuess(): User
     {
         return $this->userToGuess;
     }
 
     /**
+     * User who we should to guess
+     *
      * @param User $userToGuess
+     * @return Statistic
      */
-    public function setUserToGuess($userToGuess)
+    public function setUserToGuess(User $userToGuess): Statistic
     {
         $this->userToGuess = $userToGuess;
+
+        return $this;
     }
 
     /**
      * @return User
      */
-    public function getUser()
+    public function getUserToPick(): User
+    {
+        return $this->userToPick;
+    }
+
+    /**
+     * @param User $userToPick
+     * @return Statistic
+     */
+    public function setUserToPick(User $userToPick): Statistic
+    {
+        $this->userToPick = $userToPick;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
     {
         return $this->user;
     }
 
     /**
      * @param User $user
+     * @return Statistic
      */
-    public function setUser($user)
+    public function setUser(User $user): Statistic
     {
         $this->user = $user;
+
+        return $this;
     }
-
-
-
 }
