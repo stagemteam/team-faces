@@ -13,29 +13,37 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Stagem\Picker\Action\Admin;
+namespace Stagem\User\Action\Admin;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 #use Psr\Http\Server\RequestHandlerInterface;
+use Stagem\Statistic\Service\StatisticService;
 use Zend\Router\RouteMatch;
 use Zend\View\Model\ViewModel;
 use Stagem\ZfcAction\Page\AbstractAction;
 use Zend\View\View;
 
 /**
- * @package Stagem_Picker
+ * @package Stagem_Statistic
  */
-class PickAction extends AbstractAction
+class UserAction extends AbstractAction
 {
 
     protected $bestsellerTable;
 
     protected $bestsellerGrid;
 
-    public function __construct(/*BestsellerTable $bestsellerTable, BestsellerGrid $bestsellerGrid*/)
+    /** @var StatisticService */
+    protected $statisticService;
+
+
+    public function __construct(
+        StatisticService $statisticService
+        /*BestsellerTable $bestsellerTable, BestsellerGrid $bestsellerGrid*/)
     {
+        $this->statisticService = $statisticService;
         //$this->bestsellerTable = $bestsellerTable;
         //$this->bestsellerGrid = $bestsellerGrid;
     }
@@ -60,6 +68,21 @@ class PickAction extends AbstractAction
 
         return $dataGridVm;*/
 
-        return new ViewModel();
+        $data = [];
+
+        $this->statisticService->userStatistic($this->user()->current());
+
+        $data = [
+            'label' => 'asd',
+            'backgroundColor' => 'rgb(255, 99, 132)',
+            'borderColor' => 'rgb(255, 99, 132)',
+            'data' => [
+                3,2,4,4,5,
+            ],
+        ];
+
+        return new ViewModel([
+            'dataset' => $data
+        ]);
     }
 }

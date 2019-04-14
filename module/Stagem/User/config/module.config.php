@@ -6,6 +6,11 @@ namespace Stagem\User;
 use Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory;
 
 return [
+
+    'actions' => [
+        'profile' => __NAMESPACE__ . '\Action',
+    ],
+
     'assetic_configuration' => require_once 'assets.config.php',
     // mvc
     'view_manager' => [
@@ -15,6 +20,7 @@ return [
         ],
         'prefix_template_path_stack' => [
             'user::' => __DIR__ . '/../view/user',
+            'profile::' => __DIR__ . '/../view/profile',
         ],
     ],
 
