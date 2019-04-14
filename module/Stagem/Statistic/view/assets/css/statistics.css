@@ -1,3 +1,9 @@
+.logo{
+	width: 140px;
+	height: 40px;
+	position: absolute;
+	left: 20px;
+}
 .users{
 	display: flex;
 	align-items: center;
@@ -86,4 +92,33 @@
 	position: absolute;
 	bottom: -17px;
 	left: 28px;
+}
+
+.body-text{
+	display: flex;
+}
+.tryes, fails{
+	align-self: flex-end;
+}
+.gray-circle{
+	width: 16px;
+	height: 16px;
+	background: #BDBDBD;
+	border-radius: 50px;
+}
+.red-circle{
+	width: 16px;
+	height: 16px;
+	background: linear-gradient(180deg, #D00A0A 0%, #E26823 100%);
+	box-shadow: inset 0px 10px 20px rgba(31, 32, 65, 0.15);
+	border-radius: 15px;
+}
+.body-text .title{
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 32px;
+	line-height: normal;
+	text-align: center;
+	color: #1F2041;
 }
