@@ -2,6 +2,10 @@ body.popup{
 	background-image: url("../img/popup-bg.png");
 	background-size: 100vw 100vh;
 }
+.modal-header .close{
+	position: absolute;
+	right: 20px;
+}
 .modal-backdrop
 {
 	opacity:0.6!important;
@@ -164,6 +168,7 @@ body.popup{
 .answer.success .user-name,
 .answer.success .user-position,
 .answer.fail .user-name,
+.answer.fail .user-group-title,
 .answer.fail .user-position{
 	color: #fff;
 }
