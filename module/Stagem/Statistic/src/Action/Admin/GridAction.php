@@ -59,7 +59,19 @@ class GridAction extends AbstractAction
         foreach ($users as $user){
             if (!empty($user->getPost())){
                 $post = json_decode($user->getPost(), true);
-                $usersByOffice[str_replace(" ", '', $post['project_group_title'])][] = $user;
+
+                //we don't need date filtering, so add "false"
+                $userStat = $this->statisticService->userStatistic($user, $this->user()->current());
+                $status = empty($userStat) ? 0 : 1;
+
+
+                $userArr = [
+                    'photo' => $status ? $user->getPhoto() : '',
+                    'name' => $user->getName() . " " .  $user->getLastName(),
+                    'status' => $status
+                ];
+
+                $usersByOffice[str_replace(" ", '', strstr($post['project_group_title'], ' '))][] = $userArr;
             }
         }
 

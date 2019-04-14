@@ -26,6 +26,8 @@ class StatisticRepository extends EntityRepository
     protected $_alias = Statistic::MNEMO;
 
     protected $_userAlias = User::MNEMO;
+
+    protected $userToPick = User::MNEMO;
 //
 //    protected $_marketplaceAlias = Marketplace::MNEMO;
 //
@@ -39,22 +41,43 @@ class StatisticRepository extends EntityRepository
      * @param $userToGuess
      * @return mixed
      */
-    public function getStatisticForUser($startedAt, $endedAt, $user)
+    public function getGuessingUserStatistic($user, $startedAt, $endedAt)
     {
         $qb = $this->createQueryBuilder($this->_alias)
             ->leftJoin($this->_alias . '.user', $this->_userAlias);
-            //->leftJoin($this->_alias . '.userToGuess', $this->_userAlias);
 
         $qb->andWhere($qb->expr()->in($this->_userAlias . '.id', '?1'));
+
+        $qb->andWhere($qb->expr()->gte($this->_alias . '.checkedAt', '?2'));
+        $qb->andWhere($qb->expr()->lte($this->_alias . '.checkedAt', '?3'));
+
+        $qb->setParameter(1, $user);
+        $qb->setParameter(2, $startedAt);
+        $qb->setParameter(3, $endedAt);
+//            $qb->setParameters([
+//                2 => $startedAt,
+//                3 => $endedAt,
+//            ]);
         //$qb->andWhere($qb->expr()->in($this->_userAlias . '.id', '?1'));
-        $qb->andWhere($qb->expr()->gte($this->_alias . '.checkedAt', '?3'));
-        $qb->andWhere($qb->expr()->lte($this->_alias . '.checkedAt', '?4'));
-        $qb->setParameters([
-            1 => $user,
-            //2 => $userToGuess,
-            3 => $startedAt,
-            4 => $endedAt,
-        ]);
+
+
+
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getStatisticForUser($user, $guessingUser)
+    {
+        $qb = $this->createQueryBuilder($this->_alias)
+            ->leftJoin($this->_alias . '.userToGuess', $this->_userAlias)
+            ->leftJoin($this->_alias . '.userToPick', $this->_userAlias . '_pick')
+            ->leftJoin($this->_alias . '.user', $this->_userAlias . '_guessing');
+
+        $qb->andWhere($qb->expr()->in($this->_userAlias . '.id', '?1'));
+        $qb->andWhere($qb->expr()->in($this->_userAlias . '_pick' . '.id', '?1'));
+        $qb->andWhere($qb->expr()->in($this->_userAlias . '_guessing' . '.id', '?2'));
+
+        $qb->setParameters([1 => $user, 2 => $guessingUser ]);
 
         return $qb->getQuery()->getResult();
     }

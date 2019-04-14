@@ -20,6 +20,7 @@ namespace Stagem\Statistic\Action\Admin;
     use Interop\Http\Server\RequestHandlerInterface;
     #use Psr\Http\Server\RequestHandlerInterface;
     use Stagem\Statistic\Service\StatisticService;
+    use Stagem\Statistic\Service\UserService;
     use Zend\Router\RouteMatch;
     use Zend\View\Model\ViewModel;
     use Stagem\ZfcAction\Page\AbstractAction;
@@ -70,7 +71,7 @@ class IndexAction extends AbstractAction
 
         $data = [];
 
-        $data = $this->statisticService->userStatistic($this->user()->current());
+        $data = $this->statisticService->guessingUserStatistic($this->user()->current());
 
         $dashboardData =$this->statisticService->userDashboardData($data);
 
