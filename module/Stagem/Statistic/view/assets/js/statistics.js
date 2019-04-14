@@ -44,7 +44,11 @@ jQuery( document ).ready(function() {
 
 
 jQuery( document ).ready(function() {
-  jQuery('#statistic_first_popup').modal('show');
+  //jQuery('#statistic_first_popup').modal('show');
+
+  function showStatistics() {
+    jQuery('#statistic_first_popup').modal('show');
+  }
 });
 
 jQuery( document ).ready(function() {

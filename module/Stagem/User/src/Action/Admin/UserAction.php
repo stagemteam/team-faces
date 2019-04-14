@@ -20,17 +20,14 @@ use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 #use Psr\Http\Server\RequestHandlerInterface;
 use Stagem\Statistic\Service\StatisticService;
-use Zend\Router\RouteMatch;
 use Zend\View\Model\ViewModel;
 use Stagem\ZfcAction\Page\AbstractAction;
-use Zend\View\View;
 
 /**
  * @package Stagem_Statistic
  */
 class UserAction extends AbstractAction
 {
-
     protected $bestsellerTable;
 
     protected $bestsellerGrid;
@@ -38,10 +35,7 @@ class UserAction extends AbstractAction
     /** @var StatisticService */
     protected $statisticService;
 
-
-    public function __construct(
-        StatisticService $statisticService
-        /*BestsellerTable $bestsellerTable, BestsellerGrid $bestsellerGrid*/)
+    public function __construct(StatisticService $statisticService)
     {
         $this->statisticService = $statisticService;
         //$this->bestsellerTable = $bestsellerTable;
@@ -55,21 +49,58 @@ class UserAction extends AbstractAction
 
     public function action(ServerRequestInterface $request)
     {
-        return new ViewModel([]);
+        $data = $this->statisticService->guessingUserStatistic($this->user()->current());
 
-        /*$this->statisticService->userStatistic($this->user()->current());
+        $labels = [];
+        foreach ($data as $key => $item){
+            $labels [$item->getCheckedAt()->format('Y-m-d')][] = $item;
+        }
 
-        $data = [
-            'label' => 'asd',
-            'backgroundColor' => 'rgb(255, 99, 132)',
-            'borderColor' => 'rgb(255, 99, 132)',
-            'data' => [
-                3,2,4,4,5,
-            ],
+        $dataSet = [
+            'labels' => [],
+            'data' => []
         ];
 
+        foreach ($labels as $key => $label){
+            $forDay = 0;
+            foreach ($label as $item){
+                $forDay += $item->getStatus();
+            }
+            $dataSet['labels'][] = $key;
+            $dataSet['data'][] = $forDay/count($label)*100;
+        }
+
+        $dashboardData =$this->statisticService->userDashboardData($data);
+
+        //------------------------------------------------------------------
+        $data = [];
+        //$data = $this->statisticService->userStatistic($this->user()->current());
+        //$dashboardData =$this->statisticService->userDashboardData($data);
+        $users = $this->statisticService->getAllUsers();
+        $usersByOffice = [];
+        foreach ($users as $user) {
+            if (!empty($user->getPost())) {
+                $post = json_decode($user->getPost(), true);
+                //we don't need date filtering, so add "false"
+                $userStat = $this->statisticService->userStatistic($user, $this->user()->current());
+                $status = empty($userStat) ? 0 : 1;
+
+                $userArr = [
+                    'photo' => $status ? $user->getPhoto() : '/img/mask.svg',
+                    'name' => $user->getName(),
+                    'status' => $status
+                ];
+                $usersByOffice[str_replace(' ', '', strstr($post['project_group_title'], ' '))][] = $userArr;
+            }
+        }
+        //------------------------------------------------------------------
+
+
         return new ViewModel([
-            'dataset' => $data
-        ]);*/
+            'dataset' => $dataSet,
+            'dashboard' => $dashboardData,
+            'usersByOffice' => $usersByOffice,
+
+        ]);
     }
 }

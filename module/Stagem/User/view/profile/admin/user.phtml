@@ -13,9 +13,150 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  */
 ?>
+<?php $charsetDataset = $this->vars('dataset'); ?>
+<?php $dashboardData = $this->vars('dashboard'); ?>
+<?php $usersByOffice = $this->vars('usersByOffice')?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+
+<a class="home-button" href="/admin">
+	<img src="/img/home.png" alt="">
+</a>
+
+
+
+<div id="statistic_first_popup" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="/img/TF_logo_s.png"  class="logo" alt="logo">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="first-tab tab active">
+                    <div class="title">
+                        <div class="title-header">
+                            Statistic
+                        </div>
+                        <div class="title-main">
+                            You know your colleagues faces on <?= $dashboardData['involvementRate']?>%
+                        </div>
+                    </div>
+                    <div class="dashboard">
+                        <div class="dashboard-total">
+                            <div class="total-num">
+                                <?= $dashboardData['total']?>
+                            </div>
+                            <div class="dashboard-text">
+                                Total
+                            </div>
+
+                        </div>
+                        <div class="dashboard-successful">
+                            <div class="successful-num">
+                                <?= $dashboardData['successful']?>
+                            </div>
+                            <div class="dashboard-text">
+                                Successful
+                            </div>
+
+                        </div>
+                        <div class="dashboard-failed">
+                            <div class="fail-num">
+                                <?= $dashboardData['failed']?>
+                            </div>
+                            <div class="dashboard-text">Failed</div>
+
+                        </div>
+                    </div>
+                    <div class="dashboard-chart">
+
+                        <canvas id="myChart" height="100px"></canvas>
+                        <script>
+                          var ctx = document.getElementById('myChart');
+                          var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                              //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                              labels: <?= json_encode($charsetDataset['labels'])?>,
+                              datasets: [{
+                                label: '# of Votes',
+                                data: <?= json_encode($charsetDataset['data'])?>,
+                                backgroundColor:'rgba(0, 0, 0, 0)',
+                                borderColor: '#66D2EA',
+                                borderWidth: 1,
+                                pointRadius: 0
+                              }]
+                            },
+                            options: {
+                              legend: {
+                                display: false,
+                              },
+                              scales: {
+                                yAxes: [{
+                                  ticks: {
+                                    beginAtZero: true,
+                                    suggestedMin: 50,
+                                    suggestedMax: 100,
+                                    stepSize: 25
+                                  }
+                                }],
+                                xAxes: [{
+                                  gridLines: false
+                                }]
+                              }
+                            }
+                          });
+                        </script>
+                    </div>
+                </div>
+                <div class="second-tab tab">
+                    <div class="body-text">
+                        <div class="title">Statistic:</div>
+                        <img src="/img/Legend.svg" alt="legend">
+                    </div>
+                    <hr>
+                    <div class="users">
+                        <?php foreach ($usersByOffice as $office):?>
+                            <?php foreach ($office as $user):?>
+                                <div class="user">
+                                    <div class="user-statistic-info">
+                                        <div class="photo">
+                                            <img src="<?php echo $user['photo']?>" alt="user-photo">
+                                            <div class="check-user">
+                                                <?php if($user['status'] == 1):?>
+                                                    <img src="/img/success-check.svg" alt="success-check">
+                                                <?php else:?>
+                                                    <img src="/img/unkown-check.svg" alt="success-check">
+                                                <?php endif;?>
+                                            </div>
+                                            <div class="percents">
+                                                32%
+                                            </div>
+                                        </div>
+                                        <div class="name">
+                                            <?php echo $user['name']?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <? endforeach;?>
+                        <? endforeach;?>
+                    </div>
+                </div>
+            </div>
+            <div class="switchers">
+                <div class="switch1 active"></div>
+                <div class="switch2"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="profile_background">
-    <a class="tf" href="/admin/profile/user">
+    <a style="cursor: pointer;" class="tf" onclick="showStatistics();">
         <img src="/img/tf.png" alt="">
     </a>
 </div>

@@ -140,3 +140,9 @@ body.user-login{
 	left: 32%;
 	top: 25%;
 }
+
+.home-button {
+	position: absolute;
+	left: 13%;
+	top: 3%;
+}

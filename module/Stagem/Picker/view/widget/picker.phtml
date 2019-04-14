@@ -88,19 +88,19 @@
                       <?php endif;?>
 			          <?php if($guessed->getEmail()): ?>
 			            <div class="result-user">
-				            <span class="title-info"><img src="img/email.svg" alt="email"></span>
+				            <span class="title-info"><img src="/img/email.svg" alt="email"></span>
 				            <span class="info"> <?= $guessed->getEmail() ?></span>
 			            </div>
                       <?php endif;?>
 			          <?php if($guessed->getPhone()): ?>
 			            <div class="result-user">
-				            <span class="title-info"><img src="img/phone.svg" alt="phone"></span>
+				            <span class="title-info"><img src="/img/phone.svg" alt="phone"></span>
 				            <span class="info"> <?= $guessed->getPhone() ?></span>
 			            </div>
                       <?php endif;?>
 			          <?php if($this->picker()->extra($guessed, 'skype')): ?>
 			            <div class="result-user">
-				            <span class="title-info"><img src="img/Skype.svg" alt="skype"></span>
+				            <span class="title-info"><img src="/img/Skype.svg" alt="skype"></span>
 				            <span class="info"> <?= $this->picker()->extra($guessed, 'skype') ?></span>
 		                </div>
 			          <?php endif;?>
