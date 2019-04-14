@@ -17,6 +17,8 @@ namespace Stagem\Statistic;
 
 return [
 
+    'assetic_configuration' => require_once 'assets.config.php',
+
     //'cron' => require 'cron.config.php',
 
     //'importer' => require 'importer.config.php',
