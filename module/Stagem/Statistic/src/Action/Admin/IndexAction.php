@@ -35,10 +35,7 @@ class IndexAction extends AbstractAction
     /** @var StatisticService */
     protected $statisticService;
 
-    public function __construct(
-        StatisticService $statisticService
-        /*BestsellerTable $bestsellerTable, BestsellerGrid $bestsellerGrid*/
-    )
+    public function __construct(StatisticService $statisticService)
     {
         $this->statisticService = $statisticService;
         //$this->bestsellerTable = $bestsellerTable;
