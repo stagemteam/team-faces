@@ -29,15 +29,9 @@
 				<div class="modal-body">
 					<div class="body-text">
 						<div class="title">Statistic:</div>
-						<div class="tryes">
-							<div class="gray-circle"></div>
-							Tryes
-						</div>
-						<div class="fails">
-							<div class="red-circle"></div>
-							Fails
-						</div>
+						<img src="/img/Legend.svg" alt="legend">
 					</div>
+					<hr>
 					<div class="users">
 						<?php foreach ($usersByOffice as $office):?>
 	                        <?php foreach ($office as $user):?>
@@ -51,6 +45,9 @@
 												<?php else:?>
 													<img src="/img/unkown-check.svg" alt="success-check">
                                                 <?php endif;?>
+											</div>
+											<div class="percents">
+												32%
 											</div>
 										</div>
 	                                    <div class="name">
