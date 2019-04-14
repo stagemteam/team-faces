@@ -22,7 +22,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"><img src="../img/Close.svg" alt="close"></button>
+					<button type="button" class="close" data-dismiss="modal"><img src="/img/Close.svg" alt="close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="users">
@@ -31,7 +31,12 @@
 								<div class="user">
 									<div class="user-statistic-info">
 										<div class="photo">
-											<img src="<?php echo $user['photo']?>" alt="user-photo">
+											<img src="/<?php echo $user['photo']?>" alt="user-photo">
+											<div class="check-user">
+												<?php if($user['status'] == 0):?>
+													<img src="/img/success-check.svg" alt="success-check">
+												<?php endif;?>
+											</div>
 										</div>
 	                                    <div class="name">
 	                                        <?php echo $user['name']?>
