@@ -1,3 +1,4 @@
+/*<<<<<<< HEAD*/
 .title-header{
 	font-family: Montserrat;
 	font-style: normal;
@@ -112,10 +113,10 @@
 	-webkit-text-fill-color: transparent;
 }
 
-.dashboard-chart {
+.dashboard-chart{
 	margin-top: 10%;
 }
-
+/*=======*/
 .logo{
 	width: 140px;
 	height: 40px;
@@ -239,4 +240,5 @@
 	line-height: normal;
 	text-align: center;
 	color: #1F2041;
+/*>>>>>>> 7e6132c90a3b98eeb1dc042c2449aa18591e4509*/
 }

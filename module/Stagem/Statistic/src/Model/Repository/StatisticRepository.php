@@ -51,9 +51,13 @@ class StatisticRepository extends EntityRepository
         $qb->andWhere($qb->expr()->gte($this->_alias . '.checkedAt', '?2'));
         $qb->andWhere($qb->expr()->lte($this->_alias . '.checkedAt', '?3'));
 
+        $qb->orderBy($this->_alias . '.checkedAt', 'ASC');
+
         $qb->setParameter(1, $user);
         $qb->setParameter(2, $startedAt);
         $qb->setParameter(3, $endedAt);
+
+
 //            $qb->setParameters([
 //                2 => $startedAt,
 //                3 => $endedAt,
@@ -79,7 +83,7 @@ class StatisticRepository extends EntityRepository
 
 
         $qb->setParameters([1 => $user, 2 => $guessingUser ]);
-        $qb->orderBy($this->_alias . 'checkedAt', 'ASC');
+        //$qb->orderBy($this->_alias . 'checkedAt', 'ASC');
 
         return $qb->getQuery()->getResult();
     }

@@ -65,6 +65,7 @@ class PickAction extends AbstractAction
             /** @var User $picked */
             $picked = $this->pickerService->find($id = (int) $fields['picked']);
 
+            /** @var Statistic $statistic */
             $statistic = $this->statisticService->getObjectModel();
             $statistic->setCheckedAt(new DateTime())
                 ->setUser($this->user()->current())
