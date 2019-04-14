@@ -87,10 +87,6 @@ class PickAction extends AbstractAction
             return new JsonModel(['message' => $message, 'code' => $code]);
         }
 
-        //$users = $this->pickerService->getRandomUsers();
-
-        //return new ViewModel(['users' => $users]);
-
         return new EmptyResponse();
     }
 }
