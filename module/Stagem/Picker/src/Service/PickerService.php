@@ -46,7 +46,7 @@ class PickerService extends DomainServiceAbstract
      */
     public function getRandomUser()
     {
-        return $this->getRandomUsers(null, 1);
+        return end($this->getRandomUsers(null, 1));
     }
 
     /**
@@ -57,21 +57,42 @@ class PickerService extends DomainServiceAbstract
      * @return User[]
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getRandomUsers($guested, $n = 3)
+    public function getRandomUsers(User $guested = null, $n = 2)
     {
         $userRepository = $this->getRepository();
         // Get count of total rows
-        //$num = $userRepository->getUsers()->select('COUNT(' . User::MNEMO . '.id)')->getQuery()->getSingleScalarResult();
-        $num = 27;
-        $offset = max(0, rand(0, $num - $n - 1));
+
+        $qbCounter = $userRepository->getUsers()->select('COUNT(' . User::MNEMO . '.id)');
+        $qbCounter->andWhere($qbCounter->expr()->isNotNull(User::MNEMO . '.gender'));
 
         $qb = $userRepository->getUsers();
-        $qb->andWhere($qb->expr()->eq(User::MNEMO . '.gender', '?1'));
-        $qb->andWhere($qb->expr()->in(User::MNEMO . '.id', '?1'));
-        $qb->andWhere($qb->expr()->notIn(User::MNEMO . '.id', '?2'));
-        $qb->setParameters([1 => $guested->getG1 => $guested, 2 => $this->userHelper->current()])
-            ->setMaxResults(3)
+        if ($guested) {
+            $qb->andWhere($qb->expr()->eq(User::MNEMO . '.gender', '?2'));
+            $qb->setParameter(2, $guested->getGender());
+
+            $qb->andWhere($qb->expr()->notIn(User::MNEMO . '.id', '?3'));
+            $qb->setParameter(3, $guested);
+
+            // Counter
+            $qbCounter->andWhere($qb->expr()->eq(User::MNEMO . '.gender', '?2'));
+            $qbCounter->setParameter(2, $guested->getGender());
+
+            $qbCounter->andWhere($qbCounter->expr()->notIn(User::MNEMO . '.id', '?3'));
+            $qbCounter->setParameter(3, $guested);
+        }
+
+        $num = $qbCounter->getQuery()->getSingleScalarResult();
+
+        $offset = max(0, rand(0, $num - $n - 1));
+
+
+        $qb->andWhere($qb->expr()->isNotNull(User::MNEMO . '.gender'));
+        $qb->andWhere($qb->expr()->notIn(User::MNEMO . '.id', '?1'));
+        $qb->setParameter(1, $this->userHelper->current())
+            ->setMaxResults($n)
             ->setFirstResult($offset);
+
+
 
         return $qb->getQuery()->getResult();
     }

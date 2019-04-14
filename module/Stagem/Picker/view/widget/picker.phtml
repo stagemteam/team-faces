@@ -15,7 +15,7 @@
 ?>
 <?php /** @var \Popov\ZfcUser\Model\User[] $users */ ?>
 <?php $users = $this->picker()->getUsers(); ?>
-<?php $guessed = $this->getGuestedUser(); ?>
+<?php $guessed = $this->picker()->getGuessedUser(); ?>
 <div id="popup" class="modal fade" role="dialog">
 	<form id="picker-form">
 		<input type="hidden" id="user" name="user" value="<?= $guessed->getId() ?>" />

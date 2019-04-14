@@ -48,6 +48,8 @@ class PickerHelper extends AbstractHelper
         if (!$this->guessedUser) {
             $this->guessedUser = $this->pickerService->getRandomUser();
         }
+
+        return $this->guessedUser;
     }
 
     /**
@@ -55,7 +57,14 @@ class PickerHelper extends AbstractHelper
      */
     public function getUsers()
     {
-        return $this->pickerService->getRandomUsers($this->getGuessedUser());
+        $guessedUser = $this->getGuessedUser();
+        $users = $this->pickerService->getRandomUsers($guessedUser);
+
+
+        array_push($users, $this->getGuessedUser());
+        shuffle($users);
+
+        return $users;
     }
 
     public function extra(User $user, $field)
