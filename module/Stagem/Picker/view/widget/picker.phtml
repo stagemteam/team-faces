@@ -59,44 +59,49 @@
 	                        <div class="answer-item">
 	                            <div class="user-position">
                                     <?= $this->picker()->extra($user, 'occupation') ?>
-	                            </div>
+		                        </div>
 	                        </div>
+			                <div class="answer-item">
+				                <div class="user-group-title">
+                                    <?= $this->picker()->extra($user, 'project_group_title') ?>
+				                </div>
+			                </div>
 	                    </div>
 	                <?php endforeach; ?>
                 </div>
 	            <div class="user-result">
 		          <div class="user-info">
 			            <div class="result-user-name">
-							<span><?= $user->getFullName() ?></span>
+							<span><?= $guessed->getFullName() ?></span>
 			            </div>
-                       <?php if($this->picker()->extra($user, 'occupation')): ?>
+                       <?php if($this->picker()->extra($guessed, 'occupation')): ?>
 			            <div class="result-user">
 				            <span class="title-info">Occupation: </span>
-				            <span class="info"><?= $this->picker()->extra($user, 'occupation') ?></span>
+				            <span class="info"><?= $this->picker()->extra($guessed, 'occupation') ?></span>
 			            </div>
                       <?php endif;?>
-			          <?php if($this->picker()->extra($user, 'project_group_title')): ?>
+			          <?php if($this->picker()->extra($guessed, 'project_group_title')): ?>
 			            <div class="result-user">
 				            <span class="title-info">Branch: </span>
-				            <span class="info"> <?= $this->picker()->extra($user, 'project_group_title') ?></span>
+				            <span class="info"> <?= $this->picker()->extra($guessed, 'project_group_title') ?></span>
 			            </div>
                       <?php endif;?>
-			          <?php if($user->getEmail()): ?>
+			          <?php if($guessed->getEmail()): ?>
 			            <div class="result-user">
-				            <span class="title-info">Email: </span>
-				            <span class="info"> <?= $user->getEmail() ?></span>
+				            <span class="title-info"><img src="img/email.svg" alt="email"></span>
+				            <span class="info"> <?= $guessed->getEmail() ?></span>
 			            </div>
                       <?php endif;?>
-			          <?php if($user->getPhone()): ?>
+			          <?php if($guessed->getPhone()): ?>
 			            <div class="result-user">
-				            <span class="title-info">Phone: </span>
-				            <span class="info"> <?= $user->getPhone() ?></span>
+				            <span class="title-info"><img src="img/phone.svg" alt="phone"></span>
+				            <span class="info"> <?= $guessed->getPhone() ?></span>
 			            </div>
                       <?php endif;?>
-			          <?php if($this->picker()->extra($user, 'skype')): ?>
+			          <?php if($this->picker()->extra($guessed, 'skype')): ?>
 			            <div class="result-user">
-				            <span class="title-info">Skype: </span>
-				            <span class="info"> <?= $this->picker()->extra($user, 'skype') ?></span>
+				            <span class="title-info"><img src="img/Skype.svg" alt="skype"></span>
+				            <span class="info"> <?= $this->picker()->extra($guessed, 'skype') ?></span>
 		                </div>
 			          <?php endif;?>
 		           </div>
