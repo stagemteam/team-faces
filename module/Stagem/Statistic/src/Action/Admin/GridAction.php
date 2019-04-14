@@ -64,10 +64,9 @@ class GridAction extends AbstractAction
                 $userStat = $this->statisticService->userStatistic($user, $this->user()->current());
                 $status = empty($userStat) ? 0 : 1;
 
-
                 $userArr = [
                     'photo' => $status ? $user->getPhoto() : 'img/mask.svg',
-                    'name' => $user->getName() . " " .  $user->getLastName(),
+                    'name' => $user->getName(),
                     'status' => $status
                 ];
 
