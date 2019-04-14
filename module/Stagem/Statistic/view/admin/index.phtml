@@ -16,11 +16,18 @@
 <?php $charsetDataset = $this->vars('dataset'); ?>
 <?php $dashboardData = $this->vars('dashboard'); ?>
 
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#statistic_popup">Open Modal</button>
 
-<div>
-
-	<?php
-		echo "hey!";
-	?>
-
+<div id="statistic_popup" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
 </div>
