@@ -13,13 +13,15 @@ $('.answer', form).on('click', function (e) {
     hr.addClass('success');
     $('.modal-content .progresses .success').show( 2000 );
     console.log(guessed, picked);
+    $('.guess-buddy .buddy').text('Correct!');
   } else {
     elm.addClass('fail');
     hr.addClass('fail');
     $('.modal-content .progresses .fail').show( 2000 );
+    $('.guess-buddy .buddy').text('Wrong');
     console.log(guessed, picked);
   }
-  $('.guess-buddy .buddy').text(elm.find('.user-name').text());
+  $('#myTimer').css('display','none');
   setTimeout(function () {
     $('#popup').addClass('result');
     $('.modal-content .progresses').removeClass("fail");
