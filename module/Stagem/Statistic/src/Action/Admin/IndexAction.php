@@ -53,9 +53,7 @@ class IndexAction extends AbstractAction
 
         $labels = [];
         foreach ($data as $key => $item){
-            if ($item->getStatus() == 1){
-                $labels [$item->getCheckedAt()->format('Y-m-d')][] = $item;
-            }
+            $labels [$item->getCheckedAt()->format('Y-m-d')][] = $item;
         }
 
         $dataSet = [
@@ -64,8 +62,12 @@ class IndexAction extends AbstractAction
         ];
 
         foreach ($labels as $key => $label){
+            $forDay = 0;
+            foreach ($label as $item){
+                $forDay += $item->getStatus();
+            }
             $dataSet['labels'][] = $key;
-            $dataSet['data'][] = count($label)/5*100;
+            $dataSet['data'][] = $forDay/count($label)*100;
         }
 
         $dashboardData =$this->statisticService->userDashboardData($data);
