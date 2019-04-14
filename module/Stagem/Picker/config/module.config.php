@@ -40,7 +40,7 @@ return [
         ],
     ],
 
-    'doctrine' => [
+    /*'doctrine' => [
         'driver' => [
             __NAMESPACE__ . '_driver' => [
                 'class' => \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
@@ -54,5 +54,5 @@ return [
                 ]
             ]
         ],
-    ],
+    ],*/
 ];

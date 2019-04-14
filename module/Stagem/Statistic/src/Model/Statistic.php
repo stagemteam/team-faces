@@ -61,7 +61,7 @@ class Statistic
      *
      * @var User
      * @ORM\ManyToOne(targetEntity="Popov\ZfcUser\Model\User")
-     * @ORM\JoinColumn(name="userToGuessId", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="userToGuessId", referencedColumnName="id", nullable=true)
      */
     private $userToGuess;
 
@@ -70,7 +70,7 @@ class Statistic
      *
      * @var User
      * @ORM\ManyToOne(targetEntity="Popov\ZfcUser\Model\User")
-     * @ORM\JoinColumn(name="userToPickId", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="userToPickId", referencedColumnName="id", nullable=true)
      */
     private $userToPick;
 
@@ -152,7 +152,7 @@ class Statistic
      * @param User $userToGuess
      * @return Statistic
      */
-    public function setUserToGuess(User $userToGuess): Statistic
+    public function setUserToGuess(User $userToGuess = null): Statistic
     {
         $this->userToGuess = $userToGuess;
 
@@ -171,7 +171,7 @@ class Statistic
      * @param User $userToPick
      * @return Statistic
      */
-    public function setUserToPick(User $userToPick): Statistic
+    public function setUserToPick(User $userToPick =  null): Statistic
     {
         $this->userToPick = $userToPick;
 
