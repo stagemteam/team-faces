@@ -75,6 +75,8 @@ class GridAction extends AbstractAction
             }
         }
 
-        return new ViewModel();
+        return new ViewModel([
+            'usersByOffice' => $usersByOffice,
+        ]);
     }
 }
