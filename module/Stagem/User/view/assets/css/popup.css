@@ -11,6 +11,15 @@ body.popup{
 	align-items: center;
 	justify-content: center;
 }
+#popup.result .answers{
+	display: none;
+}
+.user-result{
+	display: none;
+}
+#popup.result .user-result{
+	display: block;
+}
 .modal-dialog{
 	width: 800px;
 	background: #FBFBFB;
@@ -32,19 +41,23 @@ body.popup{
 .modal-content{
 	padding: 0 125px;
 }
-.modal-content hr{
+.modal-content .progresses{
 	margin: 33px 0px;
 	height: 2px;
 	background: linear-gradient(180deg, #BDBDBD 0%, #F2F2F2 100%);
 	border-radius: 22px;
 }
-.modal-content hr.fail{
+.modal-content .progresses .fail{
 	background: linear-gradient(180deg, #D00A0A 0%, #E26823 100%);
 	box-shadow: inset 0px 10px 20px rgba(31, 32, 65, 0.15);
+	height: 2px;
+	display: none;
 }
-.modal-content hr.success{
+.modal-content .progresses .success{
 	background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
 	box-shadow: inset 0px 10px 20px rgba(31, 32, 65, 0.15);
+	height: 2px;
+	display: none;
 }
 .popup-user-img{
 	text-align: center;
@@ -59,6 +72,15 @@ body.popup{
 	line-height: normal;
 	text-align: center;
 	color: #1F2041;
+}
+.guess-buddy .result{
+	display: none;
+}
+#popup.result .guess-buddy h2{
+	display: none;
+}
+#popup.result .guess-buddy .result{
+	display: block;
 }
 .answers{
 	display: flex;
@@ -77,6 +99,7 @@ body.popup{
 	border: 2px solid transparent;
 	border-radius: 15px;
 	transition: 0s;
+	padding: 5px 0px;
 }
 .answer-item{
 	flex-basis: 100%;
@@ -151,3 +174,50 @@ body.popup{
 	height: 120px;
 	position: absolute;
 }
+.user-result{
+	background: #FFFFFF;
+	box-shadow: 0px 10px 20px rgba(31, 32, 65, 0.15);
+	border-radius: 15px;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.user-info{
+	padding: 25px 0px;
+	width: 80%;
+}
+.title-info{
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 24px;
+	text-align: right;
+	color: rgba(31, 32, 65, 0.75);
+	flex-basis: 45%;
+}
+.result-user-name{
+	font-family: Quicksand;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 19px;
+	line-height: normal;
+	color: #1F2041;
+	text-align: right;
+	margin-bottom: 15px;
+}
+.result-user{
+	margin: 10px 0px;
+	display: flex;
+	justify-content: space-between;
+}
+.result-user .info{
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 24px;
+	color: rgba(31, 32, 65, 0.75);
+	flex-basis: 45%;
+}
+
