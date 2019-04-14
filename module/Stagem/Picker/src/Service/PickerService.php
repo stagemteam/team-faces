@@ -39,21 +39,37 @@ class PickerService extends DomainServiceAbstract
     }
 
     /**
-     * Ger random users with performance optimization
+     * Get one random user
+     *
      * @return User[]
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getRandomUsers()
+    public function getRandomUser()
+    {
+        return $this->getRandomUsers(null, 1);
+    }
+
+    /**
+     * Ger random users with performance optimization
+     *
+     * @param User $guested
+     * @param int $n Number of random users
+     * @return User[]
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getRandomUsers($guested, $n = 3)
     {
         $userRepository = $this->getRepository();
         // Get count of total rows
-        $n = 3; // Number per pop up
-        $num = $userRepository->getUsers()->select('COUNT(' . User::MNEMO . '.id)')->getQuery()->getSingleScalarResult();
+        //$num = $userRepository->getUsers()->select('COUNT(' . User::MNEMO . '.id)')->getQuery()->getSingleScalarResult();
+        $num = 27;
         $offset = max(0, rand(0, $num - $n - 1));
 
         $qb = $userRepository->getUsers();
-        $qb->andWhere($qb->expr()->notIn(User::MNEMO . '.id', '?1'));
-        $qb->setParameters([1 => $this->userHelper->current()])
+        $qb->andWhere($qb->expr()->eq(User::MNEMO . '.gender', '?1'));
+        $qb->andWhere($qb->expr()->in(User::MNEMO . '.id', '?1'));
+        $qb->andWhere($qb->expr()->notIn(User::MNEMO . '.id', '?2'));
+        $qb->setParameters([1 => $guested->getG1 => $guested, 2 => $this->userHelper->current()])
             ->setMaxResults(3)
             ->setFirstResult($offset);
 
