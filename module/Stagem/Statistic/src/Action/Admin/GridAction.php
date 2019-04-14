@@ -65,7 +65,7 @@ class GridAction extends AbstractAction
                 $status = empty($userStat) ? 0 : 1;
 
                 $userArr = [
-                    'photo' => $status ? $user->getPhoto() : 'img/mask.svg',
+                    'photo' => $status ? $user->getPhoto() : '/img/mask.svg',
                     'name' => $user->getName(),
                     'status' => $status
                 ];
