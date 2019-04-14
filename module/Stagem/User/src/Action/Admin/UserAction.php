@@ -55,22 +55,9 @@ class UserAction extends AbstractAction
 
     public function action(ServerRequestInterface $request)
     {
-        /*$route = $request->getAttribute(RouteMatch::class);
-        $select = $this->bestsellerTable->getLastMonthBestsellers();
+        return new ViewModel([]);
 
-        $this->bestsellerGrid->setCounter($this->bestsellerTable->getLastMonthDistinctCounter());
-        $this->bestsellerGrid->init();
-        $dataGrid = $this->bestsellerGrid->getDataGrid();
-        $dataGrid->setUrl($this->url()->fromRoute($route->getMatchedRouteName(), $route->getParams()));
-        $dataGrid->setDataSource($select, $this->bestsellerTable->getAdapter());
-        $dataGrid->render();
-        $dataGridVm = $dataGrid->getResponse();
-
-        return $dataGridVm;*/
-
-        $data = [];
-
-        $this->statisticService->userStatistic($this->user()->current());
+        /*$this->statisticService->userStatistic($this->user()->current());
 
         $data = [
             'label' => 'asd',
@@ -83,6 +70,6 @@ class UserAction extends AbstractAction
 
         return new ViewModel([
             'dataset' => $data
-        ]);
+        ]);*/
     }
 }
