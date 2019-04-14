@@ -39,20 +39,23 @@ class PickerService extends DomainServiceAbstract
     }
 
     /**
+     * Ger random users with performance optimization
      * @return User[]
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getRandomUsers()
     {
-        $max = 152;
-        $qb = $this->getRepository()->getUsers();
-        $qb->andWhere($qb->expr()->in(User::MNEMO . '.id', '?1'));
-        $qb->andWhere($qb->expr()->notIn(User::MNEMO . '.id', '?2'));
-        // Performance optimization
-        $qb->setParameters([
-            1 => [rand(1, $max), rand(0, $max), rand(0, $max), rand(0, $max), rand(0, $max), rand(0, $max)],
-            2 => $this->userHelper->current()
-        ])
-            ->setMaxResults(3);
+        $userRepository = $this->getRepository();
+        // Get count of total rows
+        $n = 3; // Number per pop up
+        $num = $userRepository->getUsers()->select('COUNT(' . User::MNEMO . '.id)')->getQuery()->getSingleScalarResult();
+        $offset = max(0, rand(0, $num - $n - 1));
+
+        $qb = $userRepository->getUsers();
+        $qb->andWhere($qb->expr()->notIn(User::MNEMO . '.id', '?1'));
+        $qb->setParameters([1 => $this->userHelper->current()])
+            ->setMaxResults(3)
+            ->setFirstResult($offset);
 
         return $qb->getQuery()->getResult();
     }
