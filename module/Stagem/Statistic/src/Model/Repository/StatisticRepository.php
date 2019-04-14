@@ -79,7 +79,7 @@ class StatisticRepository extends EntityRepository
 
 
         $qb->setParameters([1 => $user, 2 => $guessingUser ]);
-        $qb->orderBy($this->_alias . 'checkedAt', 'ASC');
+        //$qb->orderBy($this->_alias . 'checkedAt', 'ASC');
 
         return $qb->getQuery()->getResult();
     }
