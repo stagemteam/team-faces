@@ -56,37 +56,31 @@ class IndexAction extends AbstractAction
 
     public function action(ServerRequestInterface $request)
     {
-        /*$route = $request->getAttribute(RouteMatch::class);
-        $select = $this->bestsellerTable->getLastMonthBestsellers();
-
-        $this->bestsellerGrid->setCounter($this->bestsellerTable->getLastMonthDistinctCounter());
-        $this->bestsellerGrid->init();
-        $dataGrid = $this->bestsellerGrid->getDataGrid();
-        $dataGrid->setUrl($this->url()->fromRoute($route->getMatchedRouteName(), $route->getParams()));
-        $dataGrid->setDataSource($select, $this->bestsellerTable->getAdapter());
-        $dataGrid->render();
-        $dataGridVm = $dataGrid->getResponse();
-
-        return $dataGridVm;*/
-
-        $data = [];
-
         $data = $this->statisticService->guessingUserStatistic($this->user()->current());
+
+        $labels = [];
+        foreach ($data as $key => $item){
+            if ($item->getStatus() == 1){
+                $labels [$item->getCheckedAt()->format('Y-m-d')][] = $item;
+            }
+        }
+
+        $dataSet = [
+            'labels' => [],
+            'data' => []
+        ];
+
+        foreach ($labels as $key => $label){
+            $dataSet['labels'][] = $key;
+            $dataSet['data'][] = count($label)/5*100;
+        }
 
         $dashboardData =$this->statisticService->userDashboardData($data);
 
 
-        $data = [
-            'label' => 'asd',
-            'backgroundColor' => 'rgb(255, 99, 132)',
-            'borderColor' => 'rgb(255, 99, 132)',
-            'data' => [
-                3,2,4,4,5,
-            ],
-        ];
 
         return new ViewModel([
-            'dataset' => $data,
+            'dataset' => $dataSet,
             'dashboard' => $dashboardData
         ]);
     }

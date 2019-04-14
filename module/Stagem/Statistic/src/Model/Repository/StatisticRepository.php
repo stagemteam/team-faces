@@ -77,7 +77,9 @@ class StatisticRepository extends EntityRepository
         $qb->andWhere($qb->expr()->in($this->_userAlias . '_pick' . '.id', '?1'));
         $qb->andWhere($qb->expr()->in($this->_userAlias . '_guessing' . '.id', '?2'));
 
+
         $qb->setParameters([1 => $user, 2 => $guessingUser ]);
+        $qb->orderBy($this->_alias . 'checkedAt', 'ASC');
 
         return $qb->getQuery()->getResult();
     }

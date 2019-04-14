@@ -40,3 +40,9 @@ $('.blabla', form).on('click', function (e) {
     console.log(jqXHR);
   });
 });
+
+
+
+jQuery( document ).ready(function() {
+  jQuery('#statistic_first_popup').modal('show');
+});
