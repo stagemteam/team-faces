@@ -69,7 +69,7 @@ class StatisticService extends DomainServiceAbstract
         $statisticDashboard ['total'] = count($data);
         foreach ($data as $item) {
             $statisticDashboard ['successful'] += $item->getStatus();
-            $statisticDashboard ['failed'] += $item->getStatus();
+            $statisticDashboard ['failed'] += $item->getStatus()==0 ? 1: 0;
         }
         if (!empty($statisticDashboard ['total'])){
             $statisticDashboard['involvementRate'] =
