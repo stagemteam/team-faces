@@ -1,14 +1,11 @@
 var form = $('#picker-form');
 $('.blabla', form).on('click', function (e) {
 
-
-
   event.preventDefault();
   var elm = $(this);
   var hr = $('.modal-content .progresses');
   var guessed = parseInt(form.find('#user').val());
   var picked = parseInt(elm.data('user'));
-
 
   if (guessed === picked) {
     elm.addClass('success');
