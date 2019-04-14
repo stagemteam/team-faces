@@ -29,12 +29,14 @@
 						<?php foreach ($usersByOffice as $office):?>
 	                        <?php foreach ($office as $user):?>
 								<div class="user">
-									<div class="photo">
-										<img src="<?php echo $user['photo']?>" alt="user-photo">
+									<div class="user-statistic-info">
+										<div class="photo">
+											<img src="<?php echo $user['photo']?>" alt="user-photo">
+										</div>
+	                                    <div class="name">
+	                                        <?php echo $user['name']?>
+	                                    </div>
 									</div>
-                                    <div class="name">
-                                        <?php echo $user['name']?>
-                                    </div>
 								</div>
 	                        <? endforeach;?>
 						<? endforeach;?>
