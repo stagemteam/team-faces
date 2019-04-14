@@ -25,13 +25,10 @@ $title = $this->sysConfig('general/info/system_name');
     <?= $this->headLink() ?>
     <?= $this->headStyle() ?>
 </head>
-<body class="popup">
+<body>
 <?php // main content ?>
 
-	<?php if ($this->resolver('widget::picker')) : ?>
-	    <?= $this->partial('widget::picker') ?>
-	<?php endif; ?>
-
+	<?= $this->content; ?>
 
 <?php // Include all JS ?>
 <?= $this->headScript() ?>

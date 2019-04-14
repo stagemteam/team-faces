@@ -17,6 +17,7 @@ return [
         'template_map' => [
             'layout::admin-login' => __DIR__ . '/../view/layout/admin/login.phtml',
             'layout::admin' => __DIR__ . '/../view/layout/admin.phtml',
+            'admin::admin/dashboard' => __DIR__ . '/../view/user/admin/dashboard.phtml',
         ],
         'prefix_template_path_stack' => [
             'user::' => __DIR__ . '/../view/user',

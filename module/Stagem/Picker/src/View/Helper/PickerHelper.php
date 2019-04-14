@@ -29,6 +29,11 @@ class PickerHelper extends AbstractHelper
     protected $pickerService;
 
     /**
+     * @var
+     */
+    protected $guessedUser;
+
+    /**
      * PickerHelper constructor.
      *
      * @param PickerService $pickerService
@@ -38,12 +43,28 @@ class PickerHelper extends AbstractHelper
         $this->pickerService = $pickerService;
     }
 
+    public function getGuessedUser()
+    {
+        if (!$this->guessedUser) {
+            $this->guessedUser = $this->pickerService->getRandomUser();
+        }
+
+        return $this->guessedUser;
+    }
+
     /**
      * @return User[]
      */
     public function getUsers()
     {
-        return $this->pickerService->getRandomUsers();
+        $guessedUser = $this->getGuessedUser();
+        $users = $this->pickerService->getRandomUsers($guessedUser);
+
+
+        array_push($users, $this->getGuessedUser());
+        shuffle($users);
+
+        return $users;
     }
 
     public function extra(User $user, $field)

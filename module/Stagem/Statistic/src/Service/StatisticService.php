@@ -25,7 +25,6 @@ use Stagem\Statistic\Model\Statistic;
 
 /**
  * @method StatisticRepository getRepository()
- * @method Statistic getObjectModel()
  * @method EntityManager getObjectManager()
  */
 class StatisticService extends DomainServiceAbstract
@@ -43,13 +42,19 @@ class StatisticService extends DomainServiceAbstract
      *
      * @param $userId
      */
-    public function userStatistic($user)
+    public function guessingUserStatistic($user)
     {
         //we will get last 30 days
         $endedAt = new DateTime('now');
         $startedAt = new DateTime('-30 days');
-        $data = $this->getRepository()->getStatisticForUser($startedAt, $endedAt, $user);
+        $data = $this->getRepository()->getGuessingUserStatistic($user, $startedAt, $endedAt);
 
+        return $data;
+    }
+
+    public function UserStatistic($user, $guessingUser)
+    {
+        $data = $this->getRepository()->getStatisticForUser($user, $guessingUser);
         return $data;
     }
 
@@ -66,8 +71,12 @@ class StatisticService extends DomainServiceAbstract
             $statisticDashboard ['successful'] += $item->getStatus();
             $statisticDashboard ['failed'] += $item->getStatus();
         }
-        $statisticDashboard['involvementRate'] =
-            $statisticDashboard ['successful'] / $statisticDashboard ['total'] * 100;
+        if (!empty($statisticDashboard ['total'])){
+            $statisticDashboard['involvementRate'] =
+                $statisticDashboard ['successful'] / $statisticDashboard ['total'] * 100;
+        }
+
+
 
         return $statisticDashboard;
     }
