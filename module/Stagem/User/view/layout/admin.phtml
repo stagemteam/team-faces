@@ -12,7 +12,8 @@ $title = $this->sysConfig('general/info/system_name');
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<!--<meta name="author" content="Stagem Company" />
     <meta name="description" content="Stagem Cloud - Business System" />
     <meta name="keywords" content="e-commerce" />
@@ -30,6 +31,8 @@ $title = $this->sysConfig('general/info/system_name');
 	<?php if ($this->resolver('widget::picker')) : ?>
 	    <?= $this->partial('widget::picker') ?>
 	<?php endif; ?>
+
+	<?= $this->content; ?>
 
 <?php // Include all JS ?>
 <?= $this->headScript() ?>
