@@ -3,11 +3,11 @@ StagemPicker = {
 
   attachEvents: function () {
     this.attachOnClickAnswer();
+    this.attachOnClosePopup();
 
     this.waitTimer();
   },
 
-  // Show Print dialog
   attachOnClickAnswer: function () {
     // Remove handler from existing elements
     this.body.off('click', '#picker-form .answer', this.clickAnswer);
@@ -16,8 +16,16 @@ StagemPicker = {
     this.body.on('click', '#picker-form .answer', this.clickAnswer);
   },
 
-  clickAnswer: function () {
-    event.preventDefault();
+  attachOnClosePopup: function () {
+    // Remove handler from existing elements
+    this.body.off('hidden.bs.modal', '#popup', this.closePopup);
+
+    // Re-add event handler for all matching elements
+    this.body.on('hidden.bs.modal', '#popup', this.closePopup);
+  },
+
+  clickAnswer: function (e) {
+    e.preventDefault();
 
     var elm = $(this);
     var form = $('#picker-form');
@@ -50,6 +58,12 @@ StagemPicker = {
     StagemPicker.sendAnswer(guessed, picked);
   },
 
+  closePopup: function(e) {
+    e.preventDefault();
+
+    StagemPicker.sendAnswer(null, null);
+  },
+
   sendAnswer: function (guessed, picked) {
     $.ajax({
       url: "/admin/picker/pick",
@@ -73,7 +87,7 @@ StagemPicker = {
         $('.answer').addClass('fail');
         $('.modal-content .progresses .fail').show(2000);
         timer.css('display', 'none');
-        $('.guess-buddy .buddy').text('Time is out!');
+        $('.guess-buddy .buddy').text('Time is up!');
         setTimeout(function () {
           $('#popup').addClass('result');
           $('.modal-content .progresses').removeClass('fail');
