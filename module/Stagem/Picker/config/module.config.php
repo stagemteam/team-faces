@@ -36,15 +36,17 @@ return [
 
     'view_helpers' => [
         'aliases' => [
-            'user' => View\Helper\PickerHelper::class,
+            'picker' => View\Helper\PickerHelper::class,
         ],
-        //'factories' => [
-        'invokables' => [
-            View\Helper\PickerHelper::class => View\Helper\PickerHelper::class,
+        'factories' => [
+            View\Helper\PickerHelper::class => View\Helper\Factory\PickerHelperFactory::class,
         ]
     ],
 
     'view_manager' => [
+        'template_map' => [
+            'widget::picker' => __DIR__ . '/../view/widget/picker.phtml',
+        ],
         'prefix_template_path_stack' => [
             'picker::' => __DIR__ . '/../view',
         ],

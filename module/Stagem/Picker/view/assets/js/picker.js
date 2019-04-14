@@ -1,15 +1,17 @@
-$('.picked').on('click', function (e) {
+var form = $('#picker-form');
+
+$('.answer', form).on('click', function (e) {
   event.preventDefault();
-  var form = $('#picker-form');
+  var elm = $(this);
   var guessed = parseInt(form.find('#user').val());
-  var picked = parseInt($(e.target).data('id'));
+  var picked = parseInt($(e.target).data('user'));
 
 
   if (guessed === picked) {
-    // @todo add success class
+    elm.addClass('success');
     console.log(guessed, picked);
   } else {
-    // @todo add fail class
+    elm.addClass('fail');
     console.log(guessed, picked);
   }
 

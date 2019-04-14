@@ -24,6 +24,7 @@ use Interop\Http\Server\RequestHandlerInterface;
 use Stagem\Picker\Service\PickerService;
 use Stagem\Statistic\Model\Statistic;
 use Stagem\Statistic\Service\StatisticService;
+use Zend\Router\RouteMatch;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Stagem\ZfcAction\Page\AbstractAction;
@@ -85,8 +86,10 @@ class PickAction extends AbstractAction
             return new JsonModel(['message' => $message, 'code' => $code]);
         }
 
-        $users = $this->pickerService->getRandomUsers();
+        //$users = $this->pickerService->getRandomUsers();
 
-        return new ViewModel(['users' => $users]);
+        //return new ViewModel(['users' => $users]);
+
+        return new EmptyResponse();
     }
 }
