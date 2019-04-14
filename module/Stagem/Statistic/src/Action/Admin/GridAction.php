@@ -54,15 +54,18 @@ class GridAction extends AbstractAction
                 //we don't need date filtering, so add "false"
                 $userStat = $this->statisticService->userStatistic($user, $this->user()->current());
                 $status = empty($userStat) ? 0 : 1;
+
                 $userArr = [
-                    'photo' => $status ? $user->getPhoto() : 'img/mask.svg',
-                    'name' => $user->getName() . " " . $user->getLastName(),
-                    'status' => $status,
+                    'photo' => $status ? $user->getPhoto() : '/img/mask.svg',
+                    'name' => $user->getName(),
+                    'status' => $status
                 ];
                 $usersByOffice[str_replace(' ', '', strstr($post['project_group_title'], ' '))][] = $userArr;
             }
         }
 
-        return new ViewModel();
+        return new ViewModel([
+            'usersByOffice' => $usersByOffice,
+        ]);
     }
 }
