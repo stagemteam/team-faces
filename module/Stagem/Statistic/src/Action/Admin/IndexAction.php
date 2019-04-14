@@ -72,11 +72,34 @@ class IndexAction extends AbstractAction
 
         $dashboardData =$this->statisticService->userDashboardData($data);
 
+        //------------------------------------------------------------------
+        $data = [];
+        //$data = $this->statisticService->userStatistic($this->user()->current());
+        //$dashboardData =$this->statisticService->userDashboardData($data);
+        $users = $this->statisticService->getAllUsers();
+        $usersByOffice = [];
+        foreach ($users as $user) {
+            if (!empty($user->getPost())) {
+                $post = json_decode($user->getPost(), true);
+                //we don't need date filtering, so add "false"
+                $userStat = $this->statisticService->userStatistic($user, $this->user()->current());
+                $status = empty($userStat) ? 0 : 1;
+
+                $userArr = [
+                    'photo' => $status ? $user->getPhoto() : '/img/mask.svg',
+                    'name' => $user->getName(),
+                    'status' => $status
+                ];
+                $usersByOffice[str_replace(' ', '', strstr($post['project_group_title'], ' '))][] = $userArr;
+            }
+        }
+        //------------------------------------------------------------------
 
 
         return new ViewModel([
             'dataset' => $dataSet,
-            'dashboard' => $dashboardData
+            'dashboard' => $dashboardData,
+            'usersByOffice' => $usersByOffice,
 
         ]);
     }

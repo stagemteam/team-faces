@@ -1,5 +1,6 @@
 StagemPicker = {
   body: $('body'),
+  timer: $('#myTimer'),
 
   attachEvents: function () {
     this.attachOnClickAnswer();
@@ -46,11 +47,11 @@ StagemPicker = {
       $('.guess-buddy .buddy').text('Wrong');
     }
 
-    $('#myTimer').css('display', 'none');
+    StagemPicker.timer.css('display', 'none');
 
     setTimeout(function () {
       $('#popup').addClass('result');
-      $('.modal-content .progresses').removeClass("fail");
+      $('.modal-content .progresses').removeClass('fail');
       $('.modal-content .progresses .fail').remove();
       $('.modal-content .progresses .success').css('display', 'block');
     }, 2000);
@@ -77,28 +78,29 @@ StagemPicker = {
   },
 
   waitTimer: function () {
-    var timer = $('#myTimer');
     $('#popup').modal('show');
-    timer.polartimer({
+    StagemPicker.timer.polartimer({
       timerSeconds: 10,
       opacity: 0.4,
       color: '#69D0C6',
       callback: function () {
         $('.answer').addClass('fail');
         $('.modal-content .progresses .fail').show(2000);
-        timer.css('display', 'none');
+        StagemPicker.timer.css('display', 'none');
         $('.guess-buddy .buddy').text('Time is up!');
+
         setTimeout(function () {
           $('#popup').addClass('result');
           $('.modal-content .progresses').removeClass('fail');
           $('.modal-content .progresses .fail').remove();
           $('.modal-content .progresses .success').css('display', 'block');
-        }, 2000);
 
-        StagemPicker.sendAnswer(0, 0);
+          //StagemPicker.sendAnswer(0, 0);
+
+        }, 2000);
       }
     });
-    timer.polartimer('start');
+    StagemPicker.timer.polartimer('start');
   }
 };
 
