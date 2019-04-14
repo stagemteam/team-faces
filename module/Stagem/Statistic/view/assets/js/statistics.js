@@ -1,5 +1,4 @@
 var form = $('#picker-form');
-
 $('.blabla', form).on('click', function (e) {
 
 
@@ -40,8 +39,6 @@ $('.blabla', form).on('click', function (e) {
     console.log(jqXHR);
   });
 });
-
-
 
 jQuery( document ).ready(function() {
   jQuery('#statistic_first_popup').modal('show');

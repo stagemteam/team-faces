@@ -22,7 +22,6 @@ use Zend\View\Model\ViewModel;
 use Stagem\ZfcAction\Page\AbstractAction;
 use Stagem\Picker\Service\ImportService;
 
-
 /**
  * @package Stagem_Picker
  */
@@ -50,28 +49,10 @@ class ImportAction extends AbstractAction
 
     public function action(ServerRequestInterface $request)
     {
-
-
-
         $file = file_get_contents('public/timebase.json', true);
         $userData = json_decode($file, true);
-
         $this->importService->import($userData);
-        echo 1;
 
-        /*$route = $request->getAttribute(RouteMatch::class);
-        $select = $this->bestsellerTable->getLastMonthBestsellers();
-
-        $this->bestsellerGrid->setCounter($this->bestsellerTable->getLastMonthDistinctCounter());
-        $this->bestsellerGrid->init();
-        $dataGrid = $this->bestsellerGrid->getDataGrid();
-        $dataGrid->setUrl($this->url()->fromRoute($route->getMatchedRouteName(), $route->getParams()));
-        $dataGrid->setDataSource($select, $this->bestsellerTable->getAdapter());
-        $dataGrid->render();
-        $dataGridVm = $dataGrid->getResponse();
-
-        return $dataGridVm;*/
-
-        return new ViewModel();
+        return new ViewModel(['message' => 'Success']);
     }
 }

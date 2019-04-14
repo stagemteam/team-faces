@@ -11,7 +11,6 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
-    'Stagem\ZfcMenu',
     'WhoopsErrorHandler',
     'Zend\Db',
     'Zend\Form',

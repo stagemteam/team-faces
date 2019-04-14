@@ -15,16 +15,52 @@
 ?>
 <?php $charsetDataset = $this->vars('dataset'); ?>
 <?php $dashboardData = $this->vars('dashboard'); ?>
+<?php $usersByOffice = $this->vars('usersByOffice')?>
 
 <div id="statistic_popup1dasd" class="modal fade" role="dialog">
 	<form id="picker-form">
-		<input type="hidden" id="user" name="user" value="" />
+<!--		<input type="hidden" id="user" name="user" value="" />-->
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<img src="/img/TF_logo_s.png"  class="logo" alt="logo">
+					<button type="button" class="close" data-dismiss="modal"><img src="/img/Close.svg" alt="close"></button>
 				</div>
 				<div class="modal-body">
+					<div class="body-text">
+						<div class="title">Statistic:</div>
+						<div class="tryes">
+							<div class="gray-circle"></div>
+							Tryes
+						</div>
+						<div class="fails">
+							<div class="red-circle"></div>
+							Fails
+						</div>
+					</div>
+					<div class="users">
+						<?php foreach ($usersByOffice as $office):?>
+	                        <?php foreach ($office as $user):?>
+								<div class="user">
+									<div class="user-statistic-info">
+										<div class="photo">
+											<img src="<?php echo $user['photo']?>" alt="user-photo">
+											<div class="check-user">
+												<?php if($user['status'] == 1):?>
+													<img src="/img/success-check.svg" alt="success-check">
+												<?php else:?>
+													<img src="/img/unkown-check.svg" alt="success-check">
+                                                <?php endif;?>
+											</div>
+										</div>
+	                                    <div class="name">
+	                                        <?php echo $user['name']?>
+	                                    </div>
+									</div>
+								</div>
+	                        <? endforeach;?>
+						<? endforeach;?>
+					</div>
 				</div>
 				<div class="modal-footer">
 				</div>
