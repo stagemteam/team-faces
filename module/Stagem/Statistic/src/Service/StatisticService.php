@@ -64,7 +64,7 @@ class StatisticService extends DomainServiceAbstract
             'total' => 0,
             'successful' => 0,
             'failed' => 0,
-            'involvementRate' => 0.0,
+            'involvementRate' => 0,
         ];
         $statisticDashboard ['total'] = count($data);
         foreach ($data as $item) {
@@ -73,7 +73,7 @@ class StatisticService extends DomainServiceAbstract
         }
         if (!empty($statisticDashboard ['total'])){
             $statisticDashboard['involvementRate'] =
-                $statisticDashboard ['successful'] / $statisticDashboard ['total'] * 100;
+                round($statisticDashboard ['successful'] / $statisticDashboard ['total'] * 100);
         }
 
 

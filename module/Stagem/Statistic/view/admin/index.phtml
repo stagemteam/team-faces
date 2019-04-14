@@ -16,15 +16,96 @@
 <?php $charsetDataset = $this->vars('dataset'); ?>
 <?php $dashboardData = $this->vars('dashboard'); ?>
 
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#statistic_popup">Open Modal</button>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#statistic_first_popup">Open Modal</button>
 
-<div id="statistic_popup" class="modal fade" role="dialog">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+
+
+
+<div id="statistic_first_popup" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
+				<div class="title">
+					<div class="title-header">
+						Statistic
+					</div>
+					<div class="title-main">
+						You know your colleagues faces on <?= $dashboardData['involvementRate']?>%
+					</div>
+				</div>
+				<div class="dashboard">
+					<div class="dashboard-total">
+						<div class="total-num">
+							<?= $dashboardData['total']?>
+						</div>
+						<div class="dashboard-text">
+							Total
+						</div>
+
+					</div>
+					<div class="dashboard-successful">
+						<div class="successful-num">
+                            <?= $dashboardData['successful']?>
+						</div>
+						<div class="dashboard-text">
+							Successful
+						</div>
+
+					</div>
+					<div class="dashboard-failed">
+						<div class="fail-num">
+                            <?= $dashboardData['failed']?>
+						</div>
+						<div class="dashboard-text">Failed</div>
+
+					</div>
+				</div>
+				<div class="dashboard-chart">
+
+					<canvas id="myChart" height="100px"></canvas>
+					<script>
+                      var ctx = document.getElementById('myChart');
+                      var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                          //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                          labels: <?= json_encode($charsetDataset['labels'])?>,
+                          datasets: [{
+                            label: '# of Votes',
+                            data: <?= json_encode($charsetDataset['data'])?>,
+                            backgroundColor:'rgba(0, 0, 0, 0)',
+                            borderColor: '#66D2EA',
+                            borderWidth: 1,
+                            pointRadius: 0
+                          }]
+                        },
+                        options: {
+                          legend: {
+                            display: false,
+                          },
+                          scales: {
+                            yAxes: [{
+                              ticks: {
+                                beginAtZero: true,
+                                suggestedMin: 50,
+                                suggestedMax: 100,
+                                stepSize: 25
+                              }
+                            }],
+                            xAxes: [{
+                              gridLines: false
+                            }]
+                          }
+                        }
+                      });
+					</script>
+				</div>
 			</div>
 			<div class="modal-footer">
 			</div>

@@ -1,3 +1,121 @@
+.title-header{
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 32px;
+	line-height: normal;
+	text-align: center;
+
+	color: #1F2041;
+}
+
+.title-main{
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 24px;
+	text-align: center;
+	color: rgba(31, 32, 65, 0.75);
+}
+.dashboard{
+	margin-top: 5%;
+	display: flex;
+	justify-content: space-between;
+}
+.dashboard-total{
+	width: 150px;
+	/* display: inline; */
+	background: #FFFFFF;
+	//box-shadow: 0px 10px 20px rgba(31, 32, 65, 0.15);
+	padding: 20px;
+	flex-wrap: wrap;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	height: 150px;
+	border-radius: 69px;
+}
+
+.dashboard-successful{
+	width: 150px;
+	/* display: inline; */
+	background: #FFFFFF;
+	box-shadow: 0px 10px 20px rgba(31, 32, 65, 0.15);
+	padding: 20px;
+	flex-wrap: wrap;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	height: 150px;
+	border-radius: 75px;
+}
+
+.dashboard-failed{
+	width: 150px;
+	/* display: inline; */
+	background: #FFFFFF;
+	//box-shadow: 0px 10px 20px rgba(31, 32, 65, 0.15);
+	padding: 20px;
+	flex-wrap: wrap;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	height: 150px;
+	border-radius: 69px;
+}
+
+.successful-num{
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: normal;
+	flex-basis: 100%;
+	font-size: 64px;
+	//line-height: 24px;
+	text-align: center;
+	background: -webkit-linear-gradient(#6FCF97, #66D2EA );
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	//color: linear-gradient(45deg, #0B2349 33%, #0D61BC 66%, #8AA9D6);
+}
+
+.dashboard-text{
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 24px;
+	text-align: center;
+	color: rgba(31, 32, 65, 0.75);
+}
+
+.total-num{
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: normal;
+	flex-basis: 100%;
+	font-size: 45px;
+	line-height: 24px;
+	text-align: center;
+	color: rgba(31, 32, 65, 0.75);
+}
+.fail-num{
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: normal;
+	flex-basis: 100%;
+	font-size: 45px;
+	//line-height: 24px;
+	text-align: center;
+	background: -webkit-linear-gradient(#D00A0A, #E26823);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.dashboard-chart {
+	margin-top: 10%;
+}
+
 .logo{
 	width: 140px;
 	height: 40px;
