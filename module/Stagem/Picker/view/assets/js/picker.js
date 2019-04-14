@@ -4,7 +4,7 @@ $('.answer', form).on('click', function (e) {
   event.preventDefault();
   var elm = $(this);
   var guessed = parseInt(form.find('#user').val());
-  var picked = parseInt($(e.target).data('user'));
+  var picked = parseInt(elm.data('user'));
 
 
   if (guessed === picked) {

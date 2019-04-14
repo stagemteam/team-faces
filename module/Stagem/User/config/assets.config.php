@@ -10,6 +10,7 @@ namespace Stagem\User;
 
 return [
 
+
     'routes' => [
         'admin(.*)' => [
             '@user_css',

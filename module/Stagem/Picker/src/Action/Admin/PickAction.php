@@ -24,6 +24,7 @@ use Interop\Http\Server\RequestHandlerInterface;
 use Stagem\Picker\Service\PickerService;
 use Stagem\Statistic\Model\Statistic;
 use Stagem\Statistic\Service\StatisticService;
+use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Router\RouteMatch;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;

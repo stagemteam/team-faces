@@ -18,7 +18,7 @@
 <?php $guessed = $users[rand(0, count($users) - 1)]; ?>
 <div id="popup" class="modal fade" role="dialog">
 	<form id="picker-form">
-		<input type="text" id="user" name="user" value="<?= $guessed->getId() ?>" />
+		<input type="hidden" id="user" name="user" value="<?= $guessed->getId() ?>" />
 
 		<div class="modal-dialog">
         <div class="modal-content">

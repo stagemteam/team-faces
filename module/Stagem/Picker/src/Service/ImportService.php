@@ -64,10 +64,13 @@ class ImportService extends DomainServiceAbstract
                     var_dump($row);
                 }
                 $row['photo'] = $data['photo']['250x250'];
+
                 $post = [];
                 $post['skype'] = $data['skype'];
                 $post['occupation'] = $data['occupation'];
                 $post['project_group_id'] = $data['project_group_id'];
+                $post['project_group_title'] = $data['project_group_title'];
+                
                 $row['post'] = json_encode($post);
                 $rows[] = $row;
             }
