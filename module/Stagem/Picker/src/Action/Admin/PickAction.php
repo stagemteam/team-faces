@@ -21,6 +21,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 #use Psr\Http\Server\RequestHandlerInterface;
 use Stagem\Picker\Service\PickerService;
+use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Router\RouteMatch;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -70,8 +71,10 @@ class PickAction extends AbstractAction
             //$message = 'Something went wrong';
         }
 
-        $users = $this->pickerService->getRandomUsers();
+        //$users = $this->pickerService->getRandomUsers();
 
-        return new ViewModel(['users' => $users]);
+        //return new ViewModel(['users' => $users]);
+
+        return new EmptyResponse();
     }
 }

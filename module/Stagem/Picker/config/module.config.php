@@ -36,7 +36,7 @@ return [
 
     'view_helpers' => [
         'aliases' => [
-            'user' => View\Helper\PickerHelper::class,
+            'picker' => View\Helper\PickerHelper::class,
         ],
         //'factories' => [
         'invokables' => [
